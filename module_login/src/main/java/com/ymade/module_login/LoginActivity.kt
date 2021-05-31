@@ -17,7 +17,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
 
     override fun processLogic() {
        mBinding?.let {
-           mBinding!!.passwordInputEt.setText("12312")
+           mBinding!!.passwordInputEt.setText("12312dd")
            it.loginAck.setOnClickListener {
             var company= mBinding!!.phoneInputEt.text.toString()
                if (TextUtils.isEmpty(company)){
