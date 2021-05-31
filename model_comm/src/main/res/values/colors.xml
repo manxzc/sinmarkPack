@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white_alpha">#1f000000</color>
+    <!--    textColor  文字样式-->
+    <color name="app_bg">#f5f5f9</color>
+    <!--    //深色-->
+    <color name="color_333333" >#333333</color>
+    <!--    //灰色-->
+    <color name="color_666666" >#666666</color>
+    <!--    //浅色-->
+    <color name="color_999999" >#999999</color>
+    <!--    //白色-->
+    <color name="color_FFFFFF" >#FFFFFF</color>
+    <!--    //分割线-->
+    <color name="color_e5e5e5" >#e5e5e5</color>
+    <!--    //灰色底-->
+    <color name="color_f7f7f7" >#f7f7f7</color>
+
+    <!--    //灰色线-->
+    <color name="clr_gray_line">#e5e5e5</color>
+
+
+    <!--    //状态-->
+    <color name="blue">#1B9AF7</color>
+    <color name="color_green">#5CB85C</color>
+    <color name="purple">#9259B8</color>
+    <color name="gray">#A6A6A6</color>
+    <color name="red">#eb333b</color>
+
+    <color name="statusRed">#EE0B0B</color>
+    <color name="color_cacdd1">#b3cdcdd1</color>
+    <color name="color_535cdc">#535cdc</color>
+    <color name="background">#f5f5f9</color>
+    <color name="color_blue_limit">#E7EBFF</color>
+    <color name="edtGray">#eeeeee</color>
+
+    <color name="item_line_color">#e5e5e5</color>
+
+    <color name="color_att_green">#44BB40</color>
+    <color name="color_att_green_test">#16C4AF</color>
+    <color name="color_att_red">#FE422C</color>
+
+    <color name="color_org">#FEE29A</color>
+    <color name="color_org_text">#FDB32A</color>
+    <color name="color_limit_blue">#DEEDFF</color>
+    <color name="color_limit_blue_text">#5DA3F7</color>
+    <color name="car_transparent">#00000000</color>
+
+    <color name="color_bg_notification">#80000000</color>
+    <color name="color_bg_name">#80000000</color>
+</resources>

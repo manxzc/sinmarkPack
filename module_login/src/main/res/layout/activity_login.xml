@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+<!--        <variable-->
+<!--            name="persenter"-->
+<!--            type="com.ymade.trace.login.presenter.LoginPresenter" />-->
+
+        <import type="android.view.View"></import>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_login_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></View>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_80dp"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/size_16dp"
+                    android:paddingBottom="@dimen/size_6dp">
+
+                    <ImageView
+                        android:layout_width="170dp"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_login_logo"
+                        android:layout_height="@dimen/size_40dp"></ImageView>
+                    <TextView
+                        android:textColor="@color/white"
+                        android:text="@string/login_tip"
+                        android:layout_marginTop="10dp"
+                        android:textSize="14dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_width="wrap_content"
+                        android:letterSpacing="0.3"
+                        android:layout_height="wrap_content"></TextView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="60dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"></TextView>
+
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:layout_marginTop="20dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/size_40dp"
+                            android:layout_height="@dimen/size_40dp"
+                            android:padding="@dimen/size_10dp"
+                            android:src="@drawable/ic_company_w"></ImageView>
+
+                        <EditText
+                            android:id="@+id/phone_input_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:layout_marginLeft="50dp"
+                            android:focusable="true"
+                            android:hint="企业代码"
+                            android:inputType="number"
+                            android:textColorHint="@color/color_cacdd1"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/size_14dp"></EditText>
+
+                    </FrameLayout>
+                    <TextView
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"></TextView>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_40dp"
+                        android:layout_marginTop="@dimen/size_12dp">
+
+                        <ImageView
+                            android:layout_width="@dimen/size_40dp"
+                            android:layout_height="@dimen/size_40dp"
+                            android:padding="@dimen/size_10dp"
+                            android:src="@drawable/ic_password_w"></ImageView>
+
+                        <EditText
+                            android:id="@+id/password_input_et"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            android:hint="设备编号"
+                            android:enabled="false"
+                            android:layout_marginLeft="50dp"
+                            android:textColor="@color/white"
+                            android:inputType="number"
+                            android:textColorHint="@color/color_cacdd1"
+                            android:textSize="@dimen/size_14dp"></EditText>
+
+                    </FrameLayout>
+                    <TextView
+                        android:background="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"></TextView>
+
+                    <Button
+                        android:id="@+id/login_ack"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/size_30dp"
+                        android:background="@drawable/shape_radius_white"
+                        android:text="激活"
+                        android:textColor="@color/color_535cdc"></Button>
+                    <Button
+                        android:id="@+id/login_Exp"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="20dp"
+                        android:text="体验登录"
+                        android:background="@drawable/shape_radius_whiteline"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/size_14dp"></Button>
+                </LinearLayout>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"></View>
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+</layout>

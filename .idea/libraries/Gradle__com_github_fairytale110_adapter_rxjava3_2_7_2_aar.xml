@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.fairytale110:adapter-rxjava3:2.7.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e79469e17740e976f55c298123fd335/jetified-adapter-rxjava3-2.7.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e79469e17740e976f55c298123fd335/jetified-adapter-rxjava3-2.7.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5e79469e17740e976f55c298123fd335/jetified-adapter-rxjava3-2.7.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.fairytale110/adapter-rxjava3/2.7.2/bd4698ab1e2c26ed041e4c3673af18c037a4a15d/adapter-rxjava3-2.7.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

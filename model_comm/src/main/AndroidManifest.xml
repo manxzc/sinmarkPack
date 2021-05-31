@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.zcxie.zc.model_comm">
+
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.PHONE_STATE" />
+
+    <!--连接网络-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--用于管理监听网络状态的变化-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--用于管理监听网络状态的变化-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--用于管理监听网络状态的变化-->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!--获取电话的状态,在打电话的时候暂停播放-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--target >=28 需要设置此权限 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+<!--    //声明此APP可以采用明文传输-->
+    <application
+        android:usesCleartextTraffic="true" >
+        <meta-data
+            android:name="com.zcxie.zc.model_comm.glidemodule.CommonGlideModule"
+            android:value="GlideModule" />
+    </application>
+</manifest>
