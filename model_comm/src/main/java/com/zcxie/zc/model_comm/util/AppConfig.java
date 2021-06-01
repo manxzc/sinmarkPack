@@ -12,6 +12,7 @@ public class AppConfig {
 
     public static MMKVEntity<String> Token = mmkvHelper.create("Token", "UNKNOW");
 
+    public static MMKVEntity<String> deviceInfo = mmkvHelper.create("deviceInfo", "");
     public static void clearAll() {
         mmkvHelper.clearAll();
     }

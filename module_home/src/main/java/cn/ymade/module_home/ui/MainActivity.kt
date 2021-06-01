@@ -2,15 +2,18 @@ package cn.ymade.module_home.ui
 
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivityMainBinding
+import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.vm.VMMain
 import com.zcxie.zc.model_comm.base.BaseActivity
 
 class MainActivity : BaseActivity<VMMain, ActivityMainBinding>() {
     override fun getLayoutId(): Int {
+        DataBaseManager.saveApplication(application)
         return R.layout.activity_main
     }
 
     override fun processLogic() {
+
         startMainTo()
     }
 

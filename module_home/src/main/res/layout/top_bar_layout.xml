@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_layout"
+    android:layout_width="match_parent"
+    android:paddingTop="25dp"
+    android:layout_height="75dp"
+    android:background="@color/color_535cdc">
+
+    <ImageView
+        android:id="@+id/root_back_btn"
+        android:layout_width="@dimen/size_60dp"
+        android:layout_height="54dp"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/size_20dp"
+        android:paddingRight="@dimen/size_20dp"
+
+        android:src="@mipmap/back_white"></ImageView>
+
+    <TextView
+        android:id="@+id/root_title_tv"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="16dp"
+        tools:text="欣码固定资产"></TextView>
+
+    <TextView
+        android:id="@+id/root_right_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/size_30dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="gone"
+        tools:text="保存"></TextView>
+
+    <TextView
+        android:id="@+id/root_right_all_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/size_80dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:visibility="gone"
+        tools:text="全选"></TextView>
+
+    <LinearLayout
+        android:id="@+id/top_right_icon_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+    </LinearLayout>
+</FrameLayout>
