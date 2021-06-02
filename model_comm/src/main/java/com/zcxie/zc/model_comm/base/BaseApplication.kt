@@ -1,5 +1,6 @@
 package com.zcxie.zc.model_comm.base
 
+import android.app.Activity
 import android.app.Application
 import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
@@ -8,10 +9,19 @@ import com.zcxie.zc.model_comm.util.Utils
 
 open class BaseApplication: Application() {
     val TAG=javaClass.simpleName
+    val  actList= mutableListOf<Activity>()
     companion object {
         var application:BaseApplication?=null
         fun getInstance()= application
         val ROOT_PACKAGE:String="com.zcxie.zc"
+    }
+    fun closeAllAct(){
+//        for (act in actList){
+//            act.finish()
+//        }
+        actList.forEach {
+            it.finish()
+        }
     }
     override fun onCreate() {
         super.onCreate()

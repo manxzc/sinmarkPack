@@ -3,9 +3,7 @@ package cn.ymade.module_home.net
 import cn.ymade.module_home.model.DeviceInfo
 import com.zcxie.zc.model_comm.net.HttpConstant
 import io.reactivex.rxjava3.core.Observable
-import okhttp3.Call
-import okhttp3.Response
-import org.json.JSONObject
+import retrofit2.Response
 import retrofit2.http.*
 
 /**
@@ -18,7 +16,7 @@ import retrofit2.http.*
 interface DeviceInfoApi {
 //    @FormUrlEncoded
 //    @GET(HttpConstant.URL_PDA_IDX)
-//    fun  queryDvInfo(@Header("Token") token:String)  : Observable<String>
+//    fun  queryDvInfo(@Header("Token") token:String)  : Observable<Response<DeviceInfo?>>
     @POST(HttpConstant.URL_PDA_IDX)
-    fun  queryDvInfo(@Header("token")  token:String)  :retrofit2.Call<DeviceInfo>
+    fun  queryDvInfo(@Header("token")  token:String)  : retrofit2.Call<DeviceInfo>
 }

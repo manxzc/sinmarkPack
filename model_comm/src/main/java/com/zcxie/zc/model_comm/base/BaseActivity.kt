@@ -1,12 +1,15 @@
 package com.zcxie.zc.model_comm.base
 
 import android.os.Bundle
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.barlibrary.ImmersionBar
+import com.zcxie.zc.model_comm.R
 
 //ViewDataBinding 是所有DataBinding的父类
 
@@ -25,15 +28,45 @@ import com.gyf.barlibrary.ImmersionBar
         super.onCreate(savedInstanceState)
         ImmersionBar.with(this).fullScreen(true).statusBarDarkFont(true).navigationBarEnable(false)
             .init()
+        // ARouter 注意一定要注入才能接收到参数
+        ARouter.getInstance().inject(this)
         //初始化binding
         mBinding = DataBindingUtil.setContentView<VDB>(this, getLayoutId())
         //给binding加上感知生命周期，AppCompatActivity就是lifeOwner，
         mBinding!!.lifecycleOwner = this
         //创建我们的ViewModel。
         mViewModel= ViewModelProvider(this).get(findViewModelClass())
+        initTopBar()
+
         processLogic()
+        BaseApplication.getInstance()?.actList?.add(this)
     }
     abstract fun findViewModelClass():Class<VM>
+
+     private var tv_TopTitle: TextView? = null
+     private var backImg: ImageView? = null
+     public fun setTopTitle(text: String?) {
+         if (tv_TopTitle != null) {
+             tv_TopTitle!!.text = text
+         }
+     }
+     private  fun initTopBar() {
+         tv_TopTitle = findViewById(R.id.root_title_tv)
+         backImg = findViewById(R.id.root_back_btn)
+         backImg?.setOnClickListener {
+             closeCurrentAct()
+         }
+
+     }
+     fun closeCurrentAct(){
+         finish()
+     }
+
+     override fun onDestroy() {
+         super.onDestroy()
+         BaseApplication.getInstance()?.actList?.remove(this)
+     }
+
 //    fun createViewModel() {
 //        if (mViewModel == null) {
 //            val modelClass: Class<*>

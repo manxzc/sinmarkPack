@@ -6,15 +6,16 @@ import com.ymade.module_login.net.LoginApi
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.net.RetrofitManager
 import com.zcxie.zc.model_comm.util.AppConfig
+import com.zcxie.zc.model_comm.util.CommUtil
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 class LoginViewModel :BaseViewModel() {
-    fun registerAndLogin(company: String, code: String): MutableLiveData<String> {
+    fun registerAndLogin(company: String, devId: String): MutableLiveData<String> {
         val listMutableLiveData: MutableLiveData<String> = MutableLiveData<String>()
         RetrofitManager.retrofit
             .create(LoginApi::class.java)
             .register("cn.ymade.pack",
-                company,"10090","10090","huawei")
+                company,devId,CommUtil.getIMEI(),CommUtil.getPhoneModel())
             .subscribeOn(Schedulers.io())
             .subscribe {
                 if (it.code==1){

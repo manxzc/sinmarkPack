@@ -6,6 +6,7 @@
         <variable
             name="vm"
             type="cn.ymade.module_home.vm.VMSetting" />
+        <import type="com.zcxie.zc.model_comm.util.CommUtil"></import>
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -34,10 +35,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
-
+                android:text="@{vm.userInfo.company}"
                 style="@style/commTextValue"
                 tools:text="mubly"></TextView>
-<!--            android:text="@{persenter.userInfo.company}"-->
 
             <View
                 style="@style/bottomLine"></View>
@@ -62,11 +62,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
-
+                android:text="@{vm.userInfo.companySN}"
                 style="@style/commTextValue"
                 tools:text="mubly"></TextView>
 
-<!--            android:text="@{persenter.userInfo.companySN}"-->
 
             <View
                 style="@style/bottomLine"></View>
@@ -121,8 +120,8 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
+                android:text="@{vm.userInfo.deviceSN}"
                 tools:text="mubly"></TextView>
-<!--            android:text="@{persenter.userInfo.deviceSN}"-->
 
 
             <View
@@ -177,8 +176,8 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
+                android:text="@{vm.userInfo.regDate}"
                 tools:text="mubly"></TextView>
-<!--            android:text="@{persenter.userInfo.regDate}"-->
 
 
             <View
@@ -205,8 +204,8 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
+                android:text="@{vm.userInfo.expiryDate}"
                 tools:text="mubly"></TextView>
-<!--            android:text="@{persenter.userInfo.expiryDate}"-->
 
 
             <View
@@ -234,8 +233,8 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_30dp"
                 style="@style/commTextValue"
+                android:text="@{CommUtil.getPackageName()}"
                 tools:text="v1.0"></TextView>
-<!--            android:text="@{persenter.versionCode}"-->
 
             <ImageView
             android:id="@+id/versiontip"
@@ -274,8 +273,8 @@
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:textColor="@color/color_535cdc"
+                android:id="@+id/btn_logout"
                 android:textSize="@dimen/size_14dp"></TextView>
-<!--            android:onClick="@{()->persenter.showDialog()}"-->
 
 
         </FrameLayout>

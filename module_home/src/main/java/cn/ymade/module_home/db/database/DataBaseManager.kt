@@ -23,6 +23,9 @@ object DataBaseManager {
             .addCallback(CreatedCallBack)
             .build()
     }
+    fun closeAll(){
+        Thread{ db.clearAllTables() }.start()
+    }
 
     fun saveApplication(application: Application) {
         DataBaseManager.application = application

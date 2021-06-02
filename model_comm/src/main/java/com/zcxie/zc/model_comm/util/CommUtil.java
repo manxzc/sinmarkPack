@@ -99,7 +99,10 @@ public class CommUtil {
 
         return file;
     }
-
+    public static String getIMEI() {
+        String imei= Build.SERIAL;
+        return imei;
+    }
     /**
      * 获取手机型号
      *

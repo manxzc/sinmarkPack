@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_radius_10_white"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dialog_tittle_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_30dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:gravity="center"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/size_18sp"
+        tools:text=""></TextView>
+
+    <TextView
+        android:id="@+id/dialog_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_6dp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:minHeight="@dimen/size_50dp"
+        android:paddingLeft="@dimen/size_16dp"
+        android:paddingRight="@dimen/size_16dp"
+        tools:text=""
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/size_14sp"></TextView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:background="@color/clr_gray_line"></View>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/dialog_promapt_cancle"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/size_40dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/size_20sp"></TextView>
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent">
+    </View>
+    <TextView
+        android:id="@+id/dialog_promapt_ack"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/size_40dp"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/main_blue"
+        android:textSize="@dimen/size_20sp"></TextView>
+</LinearLayout>
+
+</LinearLayout>
