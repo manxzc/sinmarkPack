@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="bean"
+            type="cn.ymade.module_home.model.HomeMenuBean" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:layout_marginBottom="6dp"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/main_menu_img"
+            android:layout_centerHorizontal="true"
+            app:imgResId="@{bean.iconResId}"
+            android:padding="@dimen/size_5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp">
+        </ImageView>
+
+        <TextView
+            android:layout_below="@id/main_menu_img"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            style="@style/commTextValue"
+            android:text="@{bean.menuName}"
+            android:layout_marginTop="@dimen/size_2dp"
+            android:layout_height="wrap_content">
+
+        </TextView>
+    </RelativeLayout>
+</layout>

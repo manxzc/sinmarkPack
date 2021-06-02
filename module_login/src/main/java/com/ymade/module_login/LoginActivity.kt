@@ -36,7 +36,7 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                }
                mViewModel?.registerAndLogin(company,devId)?.observe(this, Observer {
                    if (TextUtils.isEmpty(it)) {
-                     ARouter.getInstance().build("/home/homeActivity").navigation()
+                     ARouter.getInstance().build("/home/homeActivity1").navigation()
                        finish()
                    }else CommUtil.ToastU.showToast("登录失败")
                })
