@@ -56,8 +56,22 @@ import com.zcxie.zc.model_comm.R
          backImg?.setOnClickListener {
              closeCurrentAct()
          }
-
      }
+
+
+     private var mid_tv: TextView? = null
+
+     fun initBtmOnlyMind(text: String?){
+         mid_tv=findViewById(R.id.mid_tv)
+         text?.let {
+             mid_tv!!.text = text
+         }
+         mid_tv!!.setOnClickListener {
+             clickOnlyMind()
+         }
+     }
+     open fun clickOnlyMind(){}
+
      fun closeCurrentAct(){
          finish()
      }

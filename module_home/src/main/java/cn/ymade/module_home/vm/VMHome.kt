@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import cn.ymade.module_home.db.beans.DevInfoBean
 import cn.ymade.module_home.db.database.DataBaseManager
+import cn.ymade.module_home.model.DepartStaffInfo
 import cn.ymade.module_home.model.Device
 import cn.ymade.module_home.model.DeviceInfo
 import cn.ymade.module_home.model.Version
@@ -27,6 +28,46 @@ class VMHome :BaseViewModel() {
     val TAG="VMHome"
     init {
         initDeviceInfo()
+        checkStaffData()
+    }
+
+    private fun checkStaffData() {
+        if (!AppConfig.hasStaff.get()) {
+            RetrofitManager.retrofit
+                .create(DeviceInfoApi::class.java)
+                .queryDepartStaff(AppConfig.Token.get())
+                .enqueue(object : Callback<DepartStaffInfo> {
+                    override fun onResponse(
+                        call: Call<DepartStaffInfo>,
+                        response: Response<DepartStaffInfo>
+                    ) {
+                        if (response.isSuccessful) {
+                            response.body()?.let {
+                                if (it.code==1&& it.Depart.isNotEmpty()){
+                                    AppConfig.hasStaff.put(true)
+                                    Thread{
+                                        DataBaseManager.db.departStaffDao().deleteAllDepart()
+                                        DataBaseManager.db.departStaffDao().deleteAllStaff()
+                                        DataBaseManager.db.departStaffDao().insertListDepart(it.Depart)
+                                        if (it.Staff.isNotEmpty()) {
+                                            DataBaseManager.db.departStaffDao().insertListStaff(it.Staff)
+                                        }
+                                    }.start()
+                                }
+                            }
+                        }
+
+                    }
+
+                    override fun onFailure(call: Call<DepartStaffInfo>, t: Throwable) {
+                        CommUtil.ToastU.showToast("员工获取失败")
+                    }
+                })
+        }else{
+
+        }
+
+
     }
 
     fun getUserInfo(): MutableLiveData<DevInfoBean?>? {

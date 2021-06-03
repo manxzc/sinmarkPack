@@ -13,6 +13,9 @@ public class AppConfig {
     public static MMKVEntity<String> Token = mmkvHelper.create("Token", "UNKNOW");
 
     public static MMKVEntity<Boolean> hasDevInfo = mmkvHelper.create("hasDevInfo", false);
+
+    public static MMKVEntity<Boolean> hasStaff = mmkvHelper.create("hasStaff", false);
+    public static MMKVEntity<String> staff = mmkvHelper.create("staffName", "--");
     public static void clearAll() {
         mmkvHelper.clearAll();
     }

@@ -13,5 +13,6 @@
         <activity android:name=".ui.HomeActivity"></activity>
         <activity android:name=".ui.HomeActivity1"></activity>
         <activity android:name=".ui.SettingsActivity"></activity>
+        <activity android:name=".ui.StaffActivity"></activity>
     </application>
 </manifest>

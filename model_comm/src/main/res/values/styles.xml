@@ -1,0 +1,137 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+    <style name="AppTheme_App" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+
+        <item name="android:activityOpenEnterAnimation">@anim/anim_alpha_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_alpha_exit</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_alpha_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_alpha_exit</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="asset_list_item_manager">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/color_535cdc</item>
+    </style>
+    <style name="commkey10">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">@color/color_999999</item>
+    </style>
+    <style name="commkey12">
+        <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/color_999999</item>
+    </style>
+    <style name="commkey">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/color_999999</item>
+    </style>
+    <style name="commValue">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
+    <style name="commTextValue">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/color_666666</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="commDataTextValue">
+    <item name="android:textSize">13dp</item>
+    <item name="android:textColor">@color/color_666666</item>
+    <item name="android:ellipsize">end</item>
+    <item name="android:maxLines">1</item>
+</style>
+    <style name="commTextValue10_w">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="commTextValue10">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">@color/color_666666</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="commTextValue13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/color_666666</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="commTextKey10">
+        <item name="android:textSize">10dp</item>
+        <item name="android:textColor">@color/color_999999</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="commTextKey13">
+        <item name="android:textSize">13dp</item>
+        <item name="android:textColor">@color/color_999999</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="commTextKey">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/color_999999</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+    <style name="leftLine">
+        <item name="android:layout_width">@dimen/item_left_line_w</item>
+        <item name="android:background">@color/color_535cdc</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+    <style name="bottomLine">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@color/color_e5e5e5</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+<!--    <style name="tabTextWidthLineStyle">-->
+<!--        <item name="android:layout_width">match_parent</item>-->
+<!--        <item name="android:layout_height">@dimen/size_40dp</item>-->
+<!--        <item name="android:background">@color/white</item>-->
+<!--        <item name="app:tabIndicatorColor">@color/color_535cdc</item>-->
+<!--        <item name="app:tabMode">fixed</item>-->
+<!--        <item name="app:tabMaxWidth">0dp</item>-->
+<!--        <item name="app:tabGravity">fill</item>-->
+<!--        <item name="app:tabIndicatorFullWidth">false</item>-->
+<!--        <item name="app:tabSelectedTextColor">@color/color_535cdc</item>-->
+<!--        <item name="app:tabTextColor">@color/color_999999</item>-->
+<!--    </style>-->
+
+    <style name="bottom_btn_text">
+        <item name="android:textSize">14dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="NullAnimationDialog" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@null</item>
+        <item name="android:windowExitAnimation">@null</item>
+    </style>
+
+    <style name="create_operate_tab_margin">
+        <item name="android:layout_marginTop">@dimen/dimen10</item>
+        <item name="android:layout_marginBottom">@dimen/dimen10</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/color_666666</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+</resources>

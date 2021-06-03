@@ -42,7 +42,9 @@ object DataBaseManager {
     private object Migration1 : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
             // 数据库的升级语句
-            // database.execSQL("")
+            database.execSQL("CREATE TABLE IF NOT EXISTS `depart` (`Depart` TEXT  NOT NULL,`current` INTEGER NOT NULL DEFAULT 0,  'Number' TEXT,PRIMARY KEY(`Depart`))")
+            database.execSQL("CREATE TABLE IF NOT EXISTS `staff` ('uid'  INTEGER PRIMARY KEY AUTOINCREMENT,`current` INTEGER NOT NULL DEFAULT 0, `Depart` TEXT, 'Staff' TEXT,'Phone' TEXT)")
+
         }
     }
 }

@@ -1,5 +1,6 @@
 package cn.ymade.module_home.net
 
+import cn.ymade.module_home.model.DepartStaffInfo
 import cn.ymade.module_home.model.DeviceInfo
 import com.zcxie.zc.model_comm.net.HttpConstant
 import io.reactivex.rxjava3.core.Observable
@@ -19,4 +20,7 @@ interface DeviceInfoApi {
 //    fun  queryDvInfo(@Header("Token") token:String)  : Observable<Response<DeviceInfo?>>
     @POST(HttpConstant.URL_PDA_IDX)
     fun  queryDvInfo(@Header("token")  token:String)  : retrofit2.Call<DeviceInfo>
+
+    @POST(HttpConstant.URL_PDA_STAFF)
+    fun  queryDepartStaff(@Header("token")  token:String)  : retrofit2.Call<DepartStaffInfo>
 }

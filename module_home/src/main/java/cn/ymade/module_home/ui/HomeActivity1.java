@@ -44,6 +44,7 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
 
 
     public void initData() {
+        getMBinding().setVm(getMViewModel());
         initMenuData();
         //loadData();
         getMBinding().rvAssetm.setLayoutManager(new GridLayoutManager(this, 3));
@@ -83,7 +84,7 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
                         CommUtil.ToastU.showToast("同步");
                         break;
                     case 8:
-                        //startActivity(SyncActivity.class);
+                        startActivity(new Intent(HomeActivity1.this,StaffActivity.class));
                         CommUtil.ToastU.showToast("人员");
                         break;
 
@@ -197,8 +198,8 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
     @Override
     protected void onResume() {
         super.onResume();
-       // getMBinding().username.setText("hi,"+ getMViewModel().getUserInfo());
-       // binding.unCode.setText(AppConfig.DeviceNo.get());
+//        getMBinding().username.setText("hi,"+ getMViewModel().getUserInfo().);
+        getMBinding().unCode.setText(AppConfig.staff.get());
     }
 
     @Override
@@ -226,4 +227,6 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
     public Class findViewModelClass() {
         return VMHome.class;
     }
+
+
 }
