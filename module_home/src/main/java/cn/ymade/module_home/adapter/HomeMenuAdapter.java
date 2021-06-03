@@ -17,11 +17,11 @@ import cn.ymade.module_home.databinding.ItemHomeMenuLayoutBinding;
 import cn.ymade.module_home.model.HomeMenuBean;
 
 
-public class HomeMenuAdapter extends BindBaseAdapter<List<HomeMenuBean>> {
+public class HomeMenuAdapter extends BindBaseAdapter<HomeMenuBean> {
     CallBack<HomeMenuBean> callBack = null;
 
     public HomeMenuAdapter(List<HomeMenuBean> list, CallBack<HomeMenuBean> callBack) {
-        super((List<? extends List<HomeMenuBean>>) list);
+        super(list);
         this.callBack = callBack;
     }
 

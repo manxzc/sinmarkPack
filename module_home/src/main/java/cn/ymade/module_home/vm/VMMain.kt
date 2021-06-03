@@ -12,6 +12,7 @@ import com.zcxie.zc.model_comm.util.AppConfig
 
 class VMMain :BaseViewModel() {
 
+    val CHECK_DEV=false  //检测devSn开关
     fun startMain(ctx: Activity){
             val token: String = AppConfig.Token.get()
             Log.i(
@@ -19,9 +20,9 @@ class VMMain :BaseViewModel() {
                     "run: token $token"
             )
             if ("UNKNOW" != token) {
-                ARouter.getInstance().build("/home/homeActivity").navigation()
+                ARouter.getInstance().build("/home/homeActivity1").navigation()
             } else {
-                var dvId="-1"
+                var dvId=if (CHECK_DEV)"-1" else "debug"
                 try {
                     val dvm:DeviceManager= DeviceManager()
                     dvId= dvm.deviceId

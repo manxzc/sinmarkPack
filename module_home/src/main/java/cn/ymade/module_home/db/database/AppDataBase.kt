@@ -15,7 +15,7 @@ import cn.ymade.module_home.db.dao.DevInfoDao
  * email：3104873490@qq.com
  * description：
  */
-@Database(entities = [DevInfoBean::class], version = 1)
+@Database(entities = [DevInfoBean::class], version = 1 ,exportSchema = false)
 abstract class AppDataBase :RoomDatabase(){
     abstract fun devinfoDao(): DevInfoDao
 }
