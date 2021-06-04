@@ -5,11 +5,11 @@ import androidx.room.DatabaseConfiguration
 import androidx.room.InvalidationTracker
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteOpenHelper
-import cn.ymade.module_home.db.beans.DepartBean
-import cn.ymade.module_home.db.beans.DevInfoBean
-import cn.ymade.module_home.db.beans.StaffBean
+import cn.ymade.module_home.db.beans.*
 import cn.ymade.module_home.db.dao.DepartStaffDao
 import cn.ymade.module_home.db.dao.DevInfoDao
+import cn.ymade.module_home.db.dao.LotDao
+import cn.ymade.module_home.db.dao.SNDao
 
 /**
  * @author zc.xie
@@ -18,8 +18,10 @@ import cn.ymade.module_home.db.dao.DevInfoDao
  * email：3104873490@qq.com
  * description：
  */
-@Database(entities = [DevInfoBean::class,DepartBean::class,StaffBean::class], version = 2 ,exportSchema = false)
+@Database(entities = [DevInfoBean::class,DepartBean::class,StaffBean::class,LotDataBean::class,SNBean::class], version = 3 ,exportSchema = false)
 abstract class AppDataBase :RoomDatabase(){
     abstract fun devinfoDao(): DevInfoDao
     abstract fun departStaffDao(): DepartStaffDao
+    abstract fun lotDao(): LotDao
+    abstract fun snDao(): SNDao
 }

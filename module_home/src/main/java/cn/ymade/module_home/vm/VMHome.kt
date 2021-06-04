@@ -4,17 +4,15 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import cn.ymade.module_home.db.beans.DevInfoBean
 import cn.ymade.module_home.db.database.DataBaseManager
-import cn.ymade.module_home.model.DepartStaffInfo
-import cn.ymade.module_home.model.Device
-import cn.ymade.module_home.model.DeviceInfo
-import cn.ymade.module_home.model.Version
+import cn.ymade.module_home.db.database.DataBaseManager.db
+import cn.ymade.module_home.model.*
 import cn.ymade.module_home.net.DeviceInfoApi
-import com.alibaba.android.arouter.launcher.ARouter
-import com.zcxie.zc.model_comm.base.BaseApplication
 import com.zcxie.zc.model_comm.base.BaseViewModel
+import com.zcxie.zc.model_comm.callbacks.CallBack
 import com.zcxie.zc.model_comm.net.RetrofitManager
 import com.zcxie.zc.model_comm.util.AppConfig
 import com.zcxie.zc.model_comm.util.CommUtil
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
@@ -161,5 +159,21 @@ class VMHome :BaseViewModel() {
 
                     })
         }
+    }
+
+    fun getHomeTitleData( callback:CallBack<HomeTitleData>){
+        Observable.create<HomeTitleData> {
+            val inNum = db.snDao().getAllInOutContBy(0) //在库的
+            val outNum=db.snDao().getAllOutContBy(CommUtil.getCurrentTimeYMD())
+            val waitNum=db.snDao().getWaitContBy(1)
+            var homeTitleData=HomeTitleData(inNum,outNum,waitNum)
+            it.onNext(homeTitleData)
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                Log.i("TAG", "loadData: getHomeTitleData " + it)
+                callback.callBack(it)
+            }
+
     }
 }

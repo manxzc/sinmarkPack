@@ -19,7 +19,9 @@
     <color name="whiteBule">#80d8ff</color>
     <color name="account">#00bfa5</color>
     <color name="common_background">#03a9f4</color>
-    <color name="background">#f5f5f9</color>
+    <!--    f5f5f9-->
+    <color name="background">#e5e5e5</color>
+
     <color name="rippleGray">#80C0C0C0</color>
     <color name="black">#000000</color>
     <color name="motStatus">#959595</color>

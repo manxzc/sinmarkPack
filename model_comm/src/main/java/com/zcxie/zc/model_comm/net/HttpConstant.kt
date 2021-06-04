@@ -12,6 +12,9 @@ class HttpConstant {
         //出库单上传
         const val URL_SCAN_LOT_UP= "$BASE_URL/SCAN_Lot/Update"
         //出库单删除
-        const val URL_SCAN_LOT_DEL= "$BASE_URL/SCAN_Lot/Delete"
+        const val URL_SCAN_LOT_DEL= "$BASE_URL/SCAN_Lot/Update"
+
+        //可用 条码
+        const val URL_SCAN_Goods_List= "$BASE_URL//PACK_Goods/List"
     }
 }

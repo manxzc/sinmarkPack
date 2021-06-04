@@ -1,8 +1,16 @@
 package com.zcxie.zc.model_comm.base
 
+import android.app.ProgressDialog
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -40,6 +48,12 @@ import com.zcxie.zc.model_comm.R
 
         processLogic()
         BaseApplication.getInstance()?.actList?.add(this)
+
+        val intentFilter = IntentFilter()
+        for (s in ACTION_SCANRESULTs) {
+            intentFilter.addAction(s)
+        }
+        registerReceiver(broadcastReceiver, intentFilter)
     }
     abstract fun findViewModelClass():Class<VM>
 
@@ -79,6 +93,66 @@ import com.zcxie.zc.model_comm.R
      override fun onDestroy() {
          super.onDestroy()
          BaseApplication.getInstance()?.actList?.remove(this)
+         ImmersionBar.with(this).destroy()
+         unregisterReceiver(broadcastReceiver)
+     }
+
+     val ACTION_SCANRESULTs = arrayOf(
+         "android.intent.action.SCANRESULT",
+         "android.intent.ACTION_DECODE_DATA"
+     ) //扫描广播
+
+     val ACTION_SACNRESULT_VALUE = "value" //扫描值value
+
+     val ACTION_SACNRESULT_BAR_CODE_STRING = "barcode_string" //扫描值value
+
+     val ACTION_SACNRESULT_BARCODE_VALUE = "barcode_string" //扫描值value
+
+     var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+         override fun onReceive(context: Context, intent: Intent) {
+             try {
+                 Log.i("TAG", "onReceive:  ")
+                 if (intent != null) {
+                     if (intent.hasExtra(ACTION_SACNRESULT_VALUE)) {
+                         var value = intent.getStringExtra(ACTION_SACNRESULT_VALUE)
+                         if (TextUtils.isEmpty(value)) value =
+                             intent.getStringExtra(ACTION_SACNRESULT_BAR_CODE_STRING)
+                         loadCode(value)
+                     } else if (intent.hasExtra(ACTION_SACNRESULT_BARCODE_VALUE)) {
+                         var value = intent.getStringExtra(ACTION_SACNRESULT_VALUE)
+                         if (TextUtils.isEmpty(value)) value =
+                             intent.getStringExtra(ACTION_SACNRESULT_BAR_CODE_STRING)
+                         loadCode(value)
+                     }
+                 }
+             } catch (e: Exception) {
+                 Toast.makeText(context, "出错了 $e", Toast.LENGTH_LONG).show()
+             }
+         }
+     }
+
+     open fun loadCode(value: String?) {
+         Log.i("TAG", "loadCode: $value")
+     }
+
+     private var progressDialog: ProgressDialog? = null
+     open fun getProgressDialog(): ProgressDialog? {
+         if (null == progressDialog) {
+             progressDialog = ProgressDialog(this) //实例化progressDialog
+         }
+         return progressDialog
+     }
+     open fun showProgress(msg: String?) {
+         getProgressDialog()!!.setMessage(msg) //设置进度条加载内容
+         if (!progressDialog!!.isShowing) //如果进度条没有显示
+             progressDialog!!.show() //显示进度条
+     }
+
+     open fun hideProgress() {
+         if (isShowProgress()) progressDialog!!.dismiss()
+     }
+     open fun isShowProgress(): Boolean {
+         return progressDialog != null && progressDialog!!.isShowing
      }
 
 //    fun createViewModel() {

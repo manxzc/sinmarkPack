@@ -2,6 +2,8 @@ package cn.ymade.module_home.net
 
 import cn.ymade.module_home.model.DepartStaffInfo
 import cn.ymade.module_home.model.DeviceInfo
+import cn.ymade.module_home.model.GoodList
+import com.zcxie.zc.model_comm.model.BaseModel
 import com.zcxie.zc.model_comm.net.HttpConstant
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.Response
@@ -23,4 +25,11 @@ interface DeviceInfoApi {
 
     @POST(HttpConstant.URL_PDA_STAFF)
     fun  queryDepartStaff(@Header("token")  token:String)  : retrofit2.Call<DepartStaffInfo>
+
+    @FormUrlEncoded
+    @POST(HttpConstant.URL_SCAN_Goods_List)
+    fun  queryGoodList(@Header("token")  token:String,@Field("NextSN")NextSN:Int)  : retrofit2.Call<GoodList>
+
+    @POST(HttpConstant.URL_SCAN_LOT_UP)
+    fun  queryUpload(@Header("token")  token:String)  : retrofit2.Call<BaseModel>
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:background="@color/background"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <include layout="@layout/top_bar_layout"></include>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:background="@drawable/shape_radius_10_white"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:paddingBottom="12dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="下载货品数据"
+            android:id="@+id/down_check"
+            android:gravity="center"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/size_24dp"
+            android:onClick="startDown"
+            android:layout_height="@dimen/size_100dp"></TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:background="@drawable/shape_radius_10_white"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:paddingBottom="12dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="上传货品数据"
+            android:id="@+id/upload_check"
+            android:gravity="center"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/size_24dp"
+            android:onClick="startUpLoad"
+            android:layout_height="@dimen/size_100dp"></TextView>
+    </LinearLayout>
+</LinearLayout>
+</layout>
