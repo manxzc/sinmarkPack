@@ -148,8 +148,9 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="@dimen/size_40dp"
                 style="@style/commTextValue"
+                android:text="@{vm.userInfo.deviceSN}"
                 tools:text="mubly"></TextView>
-<!--            android:text="@{persenter.userInfo.UUID}"-->
+
 
 
             <View

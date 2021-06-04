@@ -36,7 +36,7 @@
             android:id="@+id/username"
             android:layout_marginLeft="16dp"
             android:maxLength="20"
-            android:text="@{vm.userInfo.UUID}"
+            android:text="@{vm.userInfo.company}"
             android:layout_height="25dp"></TextView>
         <ImageView
             android:layout_marginTop="26dp"

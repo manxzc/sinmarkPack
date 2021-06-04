@@ -5,7 +5,6 @@ import android.content.Intent
 import android.device.DeviceManager
 import android.util.Log
 import cn.ymade.module_home.R
-import cn.ymade.module_home.ui.HomeActivity
 import com.alibaba.android.arouter.launcher.ARouter
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.util.AppConfig

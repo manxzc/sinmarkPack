@@ -95,6 +95,7 @@ class VMSetting :BaseViewModel() {
                                         val ver: Version = it.Version[0]
                                         var dbBean = DevInfoBean(
                                             dev.UUID,
+                                            dev.UUID,
                                             dev.Company,
                                             dev.CompanySN,
                                             dev.Device,
@@ -102,7 +103,6 @@ class VMSetting :BaseViewModel() {
                                             dev.ExpiryDate,
                                             dev.RegDate,
                                             dev.SN,
-                                            dev.UUID,
                                             ver.Renew,
                                             ver.Url,
                                             ver.Version
