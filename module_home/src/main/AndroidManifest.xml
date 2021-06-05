@@ -14,5 +14,9 @@
         <activity android:name=".ui.SettingsActivity"></activity>
         <activity android:name=".ui.StaffActivity"></activity>
         <activity android:name=".ui.SyncActvity"></activity>
+        <activity android:name=".ui.SNListActivity"></activity>
+        <activity android:name=".ui.SimpSNActivity"></activity>
+        <activity android:name=".ui.SNSearchActivity"></activity>
+        <activity android:name=".ui.CreateOutLotActivity"></activity>
     </application>
 </manifest>

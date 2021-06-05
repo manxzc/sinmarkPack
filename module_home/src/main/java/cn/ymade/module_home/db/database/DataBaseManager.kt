@@ -52,7 +52,7 @@ object DataBaseManager {
         override fun migrate(database: SupportSQLiteDatabase) {
             // 数据库的升级语句
             database.execSQL("CREATE TABLE IF NOT EXISTS `LotDataBean` (`LotSN` TEXT  NOT NULL,`LotNo` TEXT,`LotName` TEXT,`Stamp` INTEGER NOT NULL DEFAULT 0,`Status` INTEGER NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,  'LotNo' TEXT,PRIMARY KEY(`LotSN`))")
-            database.execSQL("CREATE TABLE IF NOT EXISTS `SNBean` ('SN'  TEXT NOT NULL ,`NO` INTEGER NOT NULL DEFAULT 0,`out` INTEGER NOT NULL DEFAULT 0 ,`Title` TEXT, 'LotNo' TEXT,'Phone' TEXT,`ModifyTime` Text,`Stamp` Status  NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(`SN`))")
+            database.execSQL("CREATE TABLE IF NOT EXISTS `SNBean` ('SN'  TEXT NOT NULL ,`NO` INTEGER NOT NULL DEFAULT 0,`out` INTEGER NOT NULL DEFAULT 0 ,`Title` TEXT, 'LotSN' TEXT,'Phone' TEXT,`ModifyTime` Text,`Stamp` Status  NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(`SN`))")
         }
     }
 }

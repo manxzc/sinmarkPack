@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="bean"
+            type="cn.ymade.module_home.db.beans.SNBean" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/size_12dp"
+        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_12dp"
+        android:layout_marginBottom="@dimen/size_5dp"
+        android:background="@drawable/shape_radius_10_white"
+        android:paddingLeft="@dimen/size_12dp"
+        android:paddingBottom="@dimen/size_4dp"
+        android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:paddingTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="22dp"
+                        android:id="@+id/img_up"
+                        android:scaleType="fitXY"
+                        android:layout_marginRight="10dp"
+                        android:layout_alignParentRight="true"
+                        tools:src="@drawable/shape_up_bg"></ImageView>
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/tv_up"
+                        android:layout_marginRight="10dp"
+                        android:textColor="@color/white"
+                        android:layout_width="56dp"
+                        android:textSize="@dimen/item_tv_status_size"
+                        android:layout_alignParentRight="true"
+                        android:layout_height="22dp"></TextView>
+                    <TextView
+                        android:id="@+id/assets_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{String.valueOf(bean.Title)}"
+                        android:layout_marginRight="@dimen/size_70dp"
+                        android:textColor="@color/color_333333"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        android:textSize="16dp"
+                        tools:text="雪花膏"></TextView>
+
+                    <TextView
+                        style="@style/commTextValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/assets_name"
+                        android:layout_marginTop="4dp"
+                        android:maxLines="1"
+                        android:text="@{String.valueOf(bean.SN)}"
+                        tools:text="name"></TextView>
+                </RelativeLayout>
+                <View
+                    android:layout_marginTop="6dp"
+                    style="@style/bottomLine"></View>
+
+                <LinearLayout
+                    android:id="@+id/ll_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="3"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/size_2dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    style="@style/commTextKey13"
+                                    android:text="序号 "></TextView>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="@dimen/size_8dp"
+                                    android:text="@{String.valueOf(bean.NO)}"
+                                    style="@style/commTextValue"
+                                    tools:text="2020020"></TextView>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size_2dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/commTextKey13"
+                            android:text="时间 "></TextView>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/size_8dp"
+                            android:text="@{bean.ModifyTime}"
+                            style="@style/commTextValue"
+                            tools:text="2020020"></TextView>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+                </LinearLayout>
+    </LinearLayout>
+</layout>

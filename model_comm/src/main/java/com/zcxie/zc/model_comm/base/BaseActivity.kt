@@ -8,6 +8,8 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -18,6 +20,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.launcher.ARouter
 import com.gyf.barlibrary.ImmersionBar
 import com.zcxie.zc.model_comm.R
+import com.zcxie.zc.model_comm.callbacks.CallBack
+import com.zcxie.zc.model_comm.util.CommUtil
+import com.zcxie.zc.model_comm.util.EditViewUtil
 
 //ViewDataBinding 是所有DataBinding的父类
 
@@ -117,12 +122,12 @@ import com.zcxie.zc.model_comm.R
                          var value = intent.getStringExtra(ACTION_SACNRESULT_VALUE)
                          if (TextUtils.isEmpty(value)) value =
                              intent.getStringExtra(ACTION_SACNRESULT_BAR_CODE_STRING)
-                         loadCode(value)
+                         value?.let { loadCode(it) }
                      } else if (intent.hasExtra(ACTION_SACNRESULT_BARCODE_VALUE)) {
                          var value = intent.getStringExtra(ACTION_SACNRESULT_VALUE)
                          if (TextUtils.isEmpty(value)) value =
                              intent.getStringExtra(ACTION_SACNRESULT_BAR_CODE_STRING)
-                         loadCode(value)
+                         value?.let { loadCode(it) }
                      }
                  }
              } catch (e: Exception) {
@@ -131,7 +136,7 @@ import com.zcxie.zc.model_comm.R
          }
      }
 
-     open fun loadCode(value: String?) {
+     open fun loadCode(value: String) {
          Log.i("TAG", "loadCode: $value")
      }
 
@@ -154,25 +159,36 @@ import com.zcxie.zc.model_comm.R
      open fun isShowProgress(): Boolean {
          return progressDialog != null && progressDialog!!.isShowing
      }
+     private var searchEt: EditText? = null
 
-//    fun createViewModel() {
-//        if (mViewModel == null) {
-//            val modelClass: Class<*>
-//            //ParameterizedType获取java泛型参数类型
-////            getClass().getGenericSuperclass()
-////            返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的直接超类的 Type，然后将其转换ParameterizedType。
-////            getActualTypeArguments()
-////            返回表示此类型实际类型参数的 Type 对象的数组。[0]就是这个数组中第一个了。简而言之就是获得超类的泛型参数的实际类型。
-////
-//            val type = javaClass.genericSuperclass
-//            modelClass = if (type is ParameterizedType) {
-//                type.actualTypeArguments[0] as Class<*>
-//            } else {
-//                //如果没有指定泛型参数，则默认使用BaseViewModel
-//                BaseViewModel::class.java
-//            }
-//            //kotlin中泛型 需要用as转换成指定类型
-//            mViewModel = ViewModelProviders.of(this).get<BaseViewModel>(modelClass as Class<BaseViewModel>) as VM
-//        }
-//    }
+     open fun onSearchAction(s: String) {}
+     open fun hideTitle() {
+         findViewById<View>(R.id.parent_layout).setVisibility(View.GONE)
+     }
+     open fun initTopSearchBar() {
+         hideTitle()
+         searchEt = findViewById(R.id.search_et)
+         EditViewUtil.EditActionListener(searchEt, object : CallBack<String> {
+             override fun callBack(obj: String) {
+                 onSearchAction(obj)
+                 CommUtil.hideKeyboard(searchEt)
+             }
+         })
+         EditViewUtil.EditDatachangeLister(searchEt, object : CallBack<String> {
+             override fun callBack(obj: String?) {
+                 if (TextUtils.isEmpty(obj)) {
+                     onSearchAction("")
+                     CommUtil.hideKeyboard(searchEt)
+                 }
+             }
+         })
+     }
+
+     open fun setDoSeach( s: String){
+         searchEt?.setText(s)
+         onSearchAction(s)
+     }
+     open fun clickback(searchback: View?) {
+         finish()
+     }
 }

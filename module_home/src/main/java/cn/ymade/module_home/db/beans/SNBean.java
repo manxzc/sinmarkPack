@@ -22,7 +22,7 @@ public class SNBean implements Serializable {
     public String SN;
     public int NO;
     public String Title;
-    public String LotNo;
+    public String LotSN;
     public String ModifyTime= CommUtil.getCurrentTimeYMD();
     public int Status=1; //默认为1 ，0表示删除
     public int upload=0;   //默认为0  1 为未上传  2已上传

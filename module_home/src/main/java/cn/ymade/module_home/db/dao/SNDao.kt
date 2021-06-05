@@ -15,8 +15,21 @@ interface SNDao {
     @Query("SELECT * FROM SNBean  ")
     fun getAll(): List<SNBean>
 
-    @Query("SELECT * FROM SNBean where out=:statusCode")
-    fun getAllIiOut(statusCode: Int): List<SNBean>
+    @Query("SELECT * FROM SNBean where Status=1 ")
+    fun getAllNotDelete(): List<SNBean>
+
+    @Query("SELECT * FROM SNBean where Status=1 and SN==:sn  limit 1")
+    fun searchsingleNotDeleteBySn(sn:String): List<SNBean>
+
+
+    @Query("SELECT * FROM SNBean where Status=1 and (SN==:key or Title like '%'|| :key|| '%')")
+    fun searchAllNotDeleteBy(key:String): List<SNBean>
+
+    @Query("SELECT * FROM SNBean where out=:statusCode and Status=1 " )
+    fun getAllInOut(statusCode: Int): List<SNBean>
+
+    @Query("SELECT * FROM SNBean where out=:statusCode and Status=1 and (SN==:key or Title like '%'|| :key|| '%')")
+    fun searchAllInOut(statusCode: Int,key:String): List<SNBean>
 
     @Query("SELECT COUNT(*) FROM SNBean WHERE out=:statusCode")
     fun getAllInOutContBy(statusCode: Int):Int
@@ -27,11 +40,11 @@ interface SNDao {
     @Query("SELECT COUNT(*) FROM SNBean WHERE upload=:uploadStatus ")
     fun getWaitContBy(uploadStatus:Int):Int
 
-    @Query("SELECT * FROM SNBean where LotNo=:lotN and Status=1")
-    fun getAllByLotNo(lotN:String): List<SNBean>
+    @Query("SELECT * FROM SNBean where LotSN=:lotSN and Status=1")
+    fun getAllByLotSN(lotSN:String): List<SNBean>
 
-    @Query("SELECT * FROM SNBean where LotNo=:lotN and upload=:uploadCode")
-    fun getAllByLotNoAndUpcode(lotN:String,uploadCode:Int): List<SNBean>
+    @Query("SELECT * FROM SNBean where LotSN=:lotSN and upload=:uploadCode")
+    fun getAllByLotSNAndUpcode(lotSN:String,uploadCode:Int): List<SNBean>
 
     @Update
     fun updateSN(vararg bean:SNBean)

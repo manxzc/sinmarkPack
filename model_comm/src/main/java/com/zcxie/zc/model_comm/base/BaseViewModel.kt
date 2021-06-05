@@ -6,4 +6,5 @@ import androidx.lifecycle.ViewModel
 //自定义顶层的baseview
 open class BaseViewModel :ViewModel() {
 
+    var TAG=javaClass.simpleName
 }

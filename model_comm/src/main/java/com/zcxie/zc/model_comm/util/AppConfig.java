@@ -16,6 +16,9 @@ public class AppConfig {
 
     public static MMKVEntity<Boolean> hasStaff = mmkvHelper.create("hasStaff", false);
     public static MMKVEntity<String> staff = mmkvHelper.create("staffName", "--");
+
+    public static MMKVEntity<Long> lotAutoSN = mmkvHelper.create("lotAutoSN",1);
+
     public static void clearAll() {
         mmkvHelper.clearAll();
     }

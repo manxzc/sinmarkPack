@@ -1,14 +1,12 @@
 package cn.ymade.module_home.vm
 
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import cn.ymade.module_home.common.Constant
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.model.GoodList
 import cn.ymade.module_home.net.DeviceInfoApi
 import cn.ymade.module_home.ui.SyncActvity
-import com.zcxie.zc.model_comm.base.BaseActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
-import com.zcxie.zc.model_comm.callbacks.CallBack
 import com.zcxie.zc.model_comm.model.BaseModel
 import com.zcxie.zc.model_comm.net.RetrofitManager
 import com.zcxie.zc.model_comm.util.AppConfig
@@ -26,7 +24,6 @@ import retrofit2.Response
  */
 class VMSync :BaseViewModel() {
 
-    val TAG="VMSync"
     var NextSN=0;
     fun download(activity: SyncActvity){
         RetrofitManager.retrofit
@@ -43,7 +40,7 @@ class VMSync :BaseViewModel() {
                             for ( serBean in response.body()!!.Goods){
                                 for (localBean in localLis){
                                     if (serBean.SN==localBean.SN){
-                                        serBean.LotNo=localBean.LotNo
+                                        serBean.LotSN=localBean.LotSN
                                         serBean.Status=localBean.Status
                                         serBean.out=localBean.out
                                     }
@@ -55,7 +52,7 @@ class VMSync :BaseViewModel() {
                                 activity.runOnUiThread(object :Runnable{
                                     override fun run() {
                                         activity.hideProgress()
-                                        LiveDataBus.get().with("updateHomeTitle").postValue(1)
+                                        LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
                                     }
                                 })
                             }else{

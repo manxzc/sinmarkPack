@@ -76,6 +76,12 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
+    <style name="commText16">
+        <item name="android:textSize">16dp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
     <style name="commTextKey10">
         <item name="android:textSize">10dp</item>
         <item name="android:textColor">@color/color_999999</item>

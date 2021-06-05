@@ -27,4 +27,6 @@ public class Constant {
     public static final String  CHECK_STATUS_DIF="2";
 
     public static final String FROM_ACTION="from_action";
+
+    public static final String LD_UP_HOME_TITLE= "updateHomeTitle";
 }

@@ -1,10 +1,8 @@
 package cn.ymade.module_home.db.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import cn.ymade.module_home.db.beans.LotDataBean
+import cn.ymade.module_home.db.beans.SNBean
 
 /**
  * @author zc.xie
@@ -32,4 +30,14 @@ interface LotDao {
 
     @Query("DELETE FROM LotDataBean ")
     fun deleteAll()
+
+
+    @Update
+    fun update(vararg bean: LotDataBean)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList( beans:List<LotDataBean>)
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    fun insert(vararg bean:LotDataBean)
 }

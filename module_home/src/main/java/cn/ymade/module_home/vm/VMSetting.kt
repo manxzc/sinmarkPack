@@ -31,7 +31,6 @@ import retrofit2.Response
  */
 class VMSetting :BaseViewModel() {
 
-    val TAG="VMSetting"
     init {
         initDeviceInfo()
     }

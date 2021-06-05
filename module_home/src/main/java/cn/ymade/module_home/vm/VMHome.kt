@@ -23,7 +23,6 @@ import retrofit2.Response
 
 class VMHome :BaseViewModel() {
 
-    val TAG="VMHome"
     init {
         initDeviceInfo()
         checkStaffData()

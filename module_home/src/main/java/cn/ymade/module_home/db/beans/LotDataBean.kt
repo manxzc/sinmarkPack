@@ -14,9 +14,9 @@ import androidx.room.PrimaryKey
 @Entity
 data class LotDataBean(
     @PrimaryKey val LotSN:String,
-    @ColumnInfo(name = "LotNo") val LotNo: String?,
-    @ColumnInfo(name = "LotName") val LotName: String?,
-    @ColumnInfo(name = "Stamp") val Stamp: Long?,
-    @ColumnInfo(name = "Status") val Status: Int=1,  //默认为1 ，0表示删除
-    @ColumnInfo(name = "upload") val upload: Int=0,   //默认为0  1 为上传
+    @ColumnInfo(name = "LotNo") var LotNo: String?,
+    @ColumnInfo(name = "LotName") var LotName: String?,
+    @ColumnInfo(name = "Stamp") var Stamp: Long?,
+    @ColumnInfo(name = "Status") var Status: Int=1,  //默认为1 ，0表示删除
+    @ColumnInfo(name = "upload") var upload: Int=0,   //默认为0  1 为上传
 )

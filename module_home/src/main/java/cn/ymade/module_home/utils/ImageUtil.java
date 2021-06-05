@@ -28,4 +28,20 @@ public class ImageUtil {
         return "未上传";
 
     }
+
+
+    public int getRequestIconByUP(int upCode) {
+
+        if (upCode==2) {
+            return R.drawable.shape_up_bg;
+        }
+        return R.drawable.shape_noup_bg;
+    }
+    public String getStrByUP(int upCode) {
+        if (upCode==2) {
+            return "已上传";
+        }
+        return "未上传";
+
+    }
 }

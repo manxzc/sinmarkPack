@@ -66,31 +66,24 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
             public void callBack(HomeMenuBean obj) {
                 switch (obj.type) {
                     case 1:
-                        //startIntentActivity(CommScanActivity.class,false,Constant.FROM_ACTION,CommScanActivity.FROM_SCAN);
-                        CommUtil.ToastU.showToast("货品");
+                        startActivity(new Intent(HomeActivity1.this,SNListActivity.class));
                         break;
                     case 2:
                         //startIntentActivity(CommScanActivity.class,false,Constant.FROM_ACTION,CommScanActivity.FROM_RFID);
                         CommUtil.ToastU.showToast("单据");
                         break;
                     case 3:
-//                       startActivity(CheckListActivity.class);
-                        CommUtil.ToastU.showToast("查询");
-//                        Intent intent = new Intent(HomeActivity.this, CheckActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                        startActivity(intent);
+                        startActivity(new Intent(HomeActivity1.this,SNSearchActivity.class));
                         break;
                     case 4:
-//                      startActivity( AssetRequisitionlistActivity.class);
-                        CommUtil.ToastU.showToast("条码");
+                        startActivity(new Intent(HomeActivity1.this,SimpSNActivity.class));
                         break;
                     case 5:
 //                        startActivity( ProcessComActivity.class,Constant.EXTRA_CATE,"退还");
                         CommUtil.ToastU.showToast("汇总");
                         break;
                     case 6:
-                        CommUtil.ToastU.showToast("出库");
-                        //startActivity(SyncActivity.class);
+                        startActivity(new Intent(HomeActivity1.this,CreateOutLotActivity.class));
                         break;
                     case 7:
                         startActivity(new Intent(HomeActivity1.this,SyncActvity.class));
@@ -152,7 +145,7 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
                 startActivity(new Intent(HomeActivity1.this,SettingsActivity.class));
             }
         });
-        LiveDataBus.get().with("updateHomeTitle",Integer.class).observe(this, new Observer<Integer>() {
+        LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE,Integer.class).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 loadData();
