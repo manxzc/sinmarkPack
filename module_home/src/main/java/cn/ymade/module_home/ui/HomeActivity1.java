@@ -78,8 +78,7 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
                         startActivity(new Intent(HomeActivity1.this,SimpSNActivity.class));
                         break;
                     case 5:
-//                        startActivity( ProcessComActivity.class,Constant.EXTRA_CATE,"退还");
-                        CommUtil.ToastU.showToast("汇总");
+                        startActivity(new Intent(HomeActivity1.this,SummaryActivity.class));
                         break;
                     case 6:
                         startActivity(new Intent(HomeActivity1.this,CreateOutLotActivity.class));

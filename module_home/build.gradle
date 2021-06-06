@@ -58,6 +58,6 @@ dependencies {
     implementation project(':model_comm')
 //    implementation project(':module_login')  aRouter传参也可以不用引用目标 module
     kapt 'com.alibaba:arouter-compiler:1.2.2'
-
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
 }

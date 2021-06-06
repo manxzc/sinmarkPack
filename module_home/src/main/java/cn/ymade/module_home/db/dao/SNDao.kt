@@ -63,4 +63,11 @@ interface SNDao {
     @Query("DELETE FROM SNBean ")
     fun deleteAll()
 
+    @Query("SELECT count(DISTINCT Title) FROM SNBean")
+    fun getTitleNum():Int
+
+    // where （时间字段）between '2012-05-01 00:00:00' and '2012-05-31 23:59:59'
+    @Query("SELECT count(*) FROM SNBean where (ModifyTime) BETWEEN :startTime and :stopTime")
+    fun getTimeAll(startTime:String ,stopTime:String):Int
+
 }

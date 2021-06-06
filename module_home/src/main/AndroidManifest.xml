@@ -20,5 +20,6 @@
         <activity android:name=".ui.CreateOutLotActivity"></activity>
         <activity android:name=".ui.LotActivity"></activity>
         <activity android:name=".ui.LotInfoActivity"></activity>
+        <activity android:name=".ui.SummaryActivity"></activity>
     </application>
 </manifest>
