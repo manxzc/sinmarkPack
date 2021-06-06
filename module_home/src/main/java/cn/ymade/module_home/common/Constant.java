@@ -9,9 +9,9 @@ import cn.ymade.module_home.R;
 public class Constant {
 
     public static String[] menuName = {"货品", "单据",  "查询","条码",  "汇总",  "出库",  "同步",  "人员"};
-    public static int[] menuIconResId = {R.drawable.ic_menu_asset,R.drawable.ic_menu_asset, R.drawable.ic_menu_check,
-            R.drawable.ic_menu_asset,R.drawable.ic_menu_hz, R.drawable.ic_menu_asset,
-            R.drawable.ic_menu_im_ex_port, R.drawable.ic_menu_asset
+    public static int[] menuIconResId = {R.drawable.baoguofahuo,R.drawable.xinwenzixun, R.drawable.saomiao,
+            R.drawable.ziyuan,R.drawable.bingtu, R.drawable.peizaizhuangche,
+            R.drawable.tongbu, R.drawable.yonghu
 
     };
 

@@ -23,55 +23,6 @@ import java.util.*
  */
 class VMSummary :BaseViewModel() {
 
-//    var NextSN=0;
-//    fun download(activity: SyncActvity){
-//        RetrofitManager.retrofit
-//            .create(DeviceInfoApi::class.java)
-//            .queryGoodList(AppConfig.Token.get(),NextSN)
-//            .enqueue(object :Callback<GoodList> {
-//                override fun onResponse(call: Call<GoodList>, response: Response<GoodList>) {
-//                    Log.i(TAG, "onResponse: "+response.body()?.Goods?.size)
-//                    if (response.isSuccessful&&response.body()!=null){
-//                        NextSN=response.body()!!.NextSN
-//                        Thread{
-//                         val localLis=  DataBaseManager.db.snDao().getAll();
-//                            Log.i(TAG, "onResponse: ")
-//                            for ( serBean in response.body()!!.Goods){
-//                                for (localBean in localLis){
-//                                    if (serBean.SN==localBean.SN){
-//                                        serBean.LotSN=localBean.LotSN
-//                                        serBean.Status=localBean.Status
-//                                        serBean.out=localBean.out
-//                                    }
-//
-//                                }
-//                                DataBaseManager.db.snDao().insert(serBean)
-//                            }
-//                            if (NextSN==0){
-//                                activity.runOnUiThread(object :Runnable{
-//                                    override fun run() {
-//                                        activity.hideProgress()
-//                                        LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
-//                                    }
-//                                })
-//                            }else{
-//                                download(activity)
-//                            }
-//
-//                        }.start()
-//
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<GoodList>, t: Throwable) {
-//                    Log.i(TAG, "onFailure: "+t.message)
-//                    activity.hideProgress()
-//                }
-//
-//            })
-//    }
-//
-
 fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>){
     val df2: DateFormat = SimpleDateFormat("yyyy-MM-dd")
     var d1: Date? = null
@@ -101,7 +52,7 @@ fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>
         CommUtil.ToastU.showToast("结束时间不能小于开始时间")
         return
     }
-    Log.e("TAG", "onClick: $starTime  $stopTime")
+
     Observable.create<SummaryData> {
         val typeNum = DataBaseManager.db.snDao().getTitleNum(1) //所有数量
         val allNum= DataBaseManager.db.snDao().getTimeAll(1,starTime,stopTime) //类型
