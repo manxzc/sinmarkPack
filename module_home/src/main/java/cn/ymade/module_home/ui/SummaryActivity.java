@@ -48,6 +48,7 @@ public class SummaryActivity extends BaseActivity<VMSummary, ActivitySummaryBind
     public void initData() {
         setTopTitle("汇总");
         updateTime();
+        loading();
     }
 
 
@@ -83,16 +84,13 @@ public class SummaryActivity extends BaseActivity<VMSummary, ActivitySummaryBind
     }
 
     private void initEvent() {
-        getMBinding().btnSetStartTime.setOnClickListener(new View.OnClickListener() {
+        getMBinding().tvStartTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(SummaryActivity.this, SettingsActivity.class));
-                //getMBinding().vpSummary.setAdapter();
                 //时间选择器
                 TimePickerView pvTime = new TimePickerBuilder(SummaryActivity.this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        Toast.makeText(SummaryActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
                         getMBinding().tvStartTime.setText(getTime(date));
                     }
                 }).build();
@@ -100,16 +98,13 @@ public class SummaryActivity extends BaseActivity<VMSummary, ActivitySummaryBind
                 pvTime.show();
             }
         });
-        getMBinding().btnSetStopTime.setOnClickListener(new View.OnClickListener() {
+        getMBinding().tvStopTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(SummaryActivity.this, SettingsActivity.class));
-                //getMBinding().vpSummary.setAdapter();
                 //时间选择器
                 TimePickerView pvTime = new TimePickerBuilder(SummaryActivity.this, new OnTimeSelectListener() {
                     @Override
                     public void onTimeSelect(Date date, View v) {
-                        Toast.makeText(SummaryActivity.this, getTime(date), Toast.LENGTH_SHORT).show();
                         getMBinding().tvStopTime.setText(getTime(date));
                     }
                 }).build();
@@ -120,19 +115,7 @@ public class SummaryActivity extends BaseActivity<VMSummary, ActivitySummaryBind
         getMBinding().btnSummarySelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String start = getMBinding().tvStartTime.getText().toString();
-                String stop = getMBinding().tvStopTime.getText().toString();
-
-
-
-                getMViewModel().getNum(start,stop,new CallBack<SummaryData>() {
-                    @Override
-                    public void callBack(SummaryData data) {
-                        Log.e("TAG", "callBack: "+data.getInSN()+"  "+data.getInSN() );
-                        getMBinding().allNum.setText(""+data.getInSN());
-                        getMBinding().typeNum.setText(""+data.getTodaySN());
-                    }
-                });
+                loading();
             }
         });
 //        LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE,Integer.class).observe(this, new Observer<Integer>() {
@@ -141,9 +124,20 @@ public class SummaryActivity extends BaseActivity<VMSummary, ActivitySummaryBind
 //                loadData();
 //            }
 //        });
+
     }
 
-
+    private void loading(){
+        String start = getMBinding().tvStartTime.getText().toString();
+        String stop = getMBinding().tvStopTime.getText().toString();
+        getMViewModel().getNum(start,stop,new CallBack<SummaryData>() {
+            @Override
+            public void callBack(SummaryData data) {
+                getMBinding().allNum.setText(""+data.getAllNum());
+                getMBinding().typeNum.setText(""+data.getTypeNum());
+            }
+        });
+    }
 
     @NotNull
     @Override

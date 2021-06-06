@@ -89,8 +89,6 @@ fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>
     val nowdayTime = dateFormat.format(Date())
     val nowDate = dateFormat.parse(nowdayTime)
 
-    Log.e("TAG", "onClick: " + d3 + "  " + d4)
-
     if ((d2!!.time)/1000 > (nowDate!!.time)/1000) {
         CommUtil.ToastU.showToast("查询时间不能超过今天")
         return
@@ -105,14 +103,13 @@ fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>
     }
     Log.e("TAG", "onClick: $starTime  $stopTime")
     Observable.create<SummaryData> {
-        val inNum = DataBaseManager.db.snDao().getTitleNum() //所有数量
-        val outNum= DataBaseManager.db.snDao().getTimeAll(starTime,stopTime) //时间内数量
-        var homeTitleData= SummaryData(inNum,1)
+        val typeNum = DataBaseManager.db.snDao().getTitleNum() //所有数量
+        val allNum= DataBaseManager.db.snDao().getTimeAll(starTime,stopTime) //类型
+        var homeTitleData= SummaryData(allNum,typeNum)
         it.onNext(homeTitleData)
     }.subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .subscribe {
-            Log.i("TAG", "loadData: getHomeTitleData " + it)
             callback.callBack(it)
         }
 

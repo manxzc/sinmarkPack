@@ -7,4 +7,4 @@ package cn.ymade.module_home.model
  * email：3104873490@qq.com
  * description：
  */
-data class SummaryData(val inSN:Int, val todaySN:Int)
+data class SummaryData(val allNum:Int, val typeNum:Int)

@@ -21,175 +21,139 @@
             android:layout_marginBottom="@dimen/dimen10"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_40dp"
-                android:layout_marginLeft="@dimen/dimen10"
-                android:layout_marginRight="@dimen/dimen10"
-                android:orientation="horizontal">
+            <FrameLayout
+                android:id="@+id/frameLayout3"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
 
                 <TextView
-                    android:id="@+id/textView2"
-                    android:layout_width="@dimen/size_70dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:text="开始时间:" />
-
-                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:layout_marginRight="@dimen/dimen10"
-                    android:layout_weight="20"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:id="@+id/tv_start_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:ems="10"
-                        android:textSize="@dimen/size_26sp"
-                        android:textColor="@color/black"
-                        android:text="2021" />
-
-                </LinearLayout>
-                <Button
-                    android:id="@+id/btn_set_start_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen30"
-                    android:layout_gravity="center"
-                    android:background="@drawable/shape_up_bg"
-                    android:text="设置"
-                    android:textColor="@color/white"></Button>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/size_40dp"
-                android:layout_marginTop="@dimen/dimen10"
-                android:layout_marginLeft="@dimen/dimen10"
-                android:layout_marginRight="@dimen/dimen10"
-                android:orientation="horizontal">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="开始时间:"
+                    style="@style/commTextKey"></TextView>
 
                 <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="@dimen/size_70dp"
+                    android:id="@+id/tv_start_time"
+                    android:layout_marginLeft="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:textColor="@color/black"
-                    android:text="结束时间:" />
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    style="@style/commTextValue"
+                    tools:text="mubly"></TextView>
 
-                <LinearLayout
+
+                <View
+                    style="@style/bottomLine"></View>
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayout4"
+                android:layout_width="match_parent"
+                android:background="@color/white"
+                android:layout_height="@dimen/size_45dp">
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen10"
-                    android:layout_marginRight="@dimen/dimen10"
-                    android:layout_weight="20"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/size_16dp"
+                    android:text="结束时间:"
+                    style="@style/commTextKey"></TextView>
 
-                    <TextView
-                        android:id="@+id/tv_stop_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:ems="10"
-                        android:textSize="@dimen/size_26sp"
-                        android:textColor="@color/black"
-                        android:text="2021" />
+                <TextView
+                    android:id="@+id/tv_stop_time"
+                    android:layout_marginLeft="120dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="@dimen/size_40dp"
+                    style="@style/commTextValue"
+                    tools:text="mubly"></TextView>
 
-                </LinearLayout>
 
-                <Button
-                    android:id="@+id/btn_set_stop_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/dimen30"
-                    android:layout_gravity="center"
-                    android:background="@drawable/shape_up_bg"
-                    android:text="设置"
-                    android:textColor="@color/white"></Button>
-
-            </LinearLayout>
+                <View
+                    style="@style/bottomLine"></View>
+            </FrameLayout>
         </LinearLayout>
-        <Button
-            android:id="@+id/btn_summary_select"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/size_40dp"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_up_bg"
-            android:text="查询"
-            android:textColor="@color/white"></Button>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/size_20dp"
-            android:layout_height="wrap_content">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:id="@+id/ll_wwait_check"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/size_26sp"
-                    android:textColor="@color/green"
-                    android:text="数量"
-                    android:layout_marginTop="@dimen/size_6dp"
-                    android:layout_height="wrap_content"></TextView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/all_num"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/size_26sp"
-                    android:layout_marginTop="@dimen/dimen4"
-                    tools:text="0"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:maxWidth="@dimen/size_100dp"
-                    android:layout_height="wrap_content"
-                    ></TextView>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:id="@+id/ll_com_check"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:textSize="@dimen/size_26sp"
-                    android:textColor="@color/green"
-                    android:text="型号"
-                    android:layout_marginTop="@dimen/size_6dp"
-                    android:layout_height="wrap_content"></TextView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:id="@+id/type_num"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/size_26sp"
-                    android:layout_marginTop="@dimen/dimen4"
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:maxWidth="@dimen/size_100dp"
-                    tools:text="0"
-                    android:layout_height="wrap_content"
-                    ></TextView>
-
-
-            </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_summary_select"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/size_40dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="@dimen/size_10dp"
+                android:background="@drawable/shape_up_bg"
+                android:text="查询"
+                android:textColor="@color/white"></Button>
         </LinearLayout>
+
+        <FrameLayout
+            android:layout_marginTop="@dimen/dimen10"
+            android:id="@+id/frameLayout1"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="数量"
+                style="@style/commTextKey"></TextView>
+
+            <TextView
+                android:id="@+id/all_num"
+                android:layout_marginLeft="120dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/size_40dp"
+                style="@style/commTextValue"
+                tools:text="mubly"></TextView>
+
+
+            <View
+                style="@style/bottomLine"></View>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:layout_height="@dimen/size_45dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/size_16dp"
+                android:text="类型"
+                style="@style/commTextKey"></TextView>
+
+            <TextView
+                android:id="@+id/type_num"
+                android:layout_marginLeft="120dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/size_40dp"
+                style="@style/commTextValue"
+                tools:text="mubly"></TextView>
+
+
+            <View
+                style="@style/bottomLine"></View>
+        </FrameLayout>
+
     </LinearLayout>
 </LinearLayout>
 </layout>
