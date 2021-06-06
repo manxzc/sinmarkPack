@@ -44,6 +44,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -53,7 +54,7 @@ import java.util.regex.Pattern;
 /**
  * 所有的工具类集合
  */
-public class CommUtil {
+public class CommUtil<T> {
 
     /**
      * 判断是否有网络
@@ -1052,4 +1053,28 @@ public class CommUtil {
 //    public static List<T> swap(List<T> tList,int index1,int index2){
 //        return  Collections.swap(tList,index1,index2);
 //    }
+
+
+
+    /**
+     * 按制定长度切割list 集合
+     * @param list
+     * @param groupSize
+     * @param <T>
+     * @return
+     */
+    public static <T> List<List<T>> splitList(List<T> list, int groupSize){
+        int length = list.size();
+        // 计算可以分成多少组
+        int num = ( length + groupSize - 1 )/groupSize ; // TODO
+        List<List<T>> newList = new ArrayList<>(num);
+        for (int i = 0; i < num; i++) {
+            // 开始位置
+            int fromIndex = i * groupSize;
+            // 结束位置
+            int toIndex = (i+1) * groupSize < length ? ( i+1 ) * groupSize : length ;
+            newList.add(list.subList(fromIndex,toIndex)) ;
+        }
+        return  newList ;
+    }
 }

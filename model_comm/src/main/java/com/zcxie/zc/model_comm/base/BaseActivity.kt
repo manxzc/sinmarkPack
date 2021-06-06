@@ -160,6 +160,8 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
      open fun getProgressDialog(): ProgressDialog? {
          if (null == progressDialog) {
              progressDialog = ProgressDialog(this) //实例化progressDialog
+//             progressDialog!!.setCancelable(false)
+             progressDialog!!.setCanceledOnTouchOutside(false)
          }
          return progressDialog
      }

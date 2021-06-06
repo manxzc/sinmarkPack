@@ -3,9 +3,11 @@ package cn.ymade.module_home.net
 import cn.ymade.module_home.model.DepartStaffInfo
 import cn.ymade.module_home.model.DeviceInfo
 import cn.ymade.module_home.model.GoodList
+import cn.ymade.module_home.model.UploadLotbean
 import com.zcxie.zc.model_comm.model.BaseModel
 import com.zcxie.zc.model_comm.net.HttpConstant
 import io.reactivex.rxjava3.core.Observable
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -29,7 +31,15 @@ interface DeviceInfoApi {
     @FormUrlEncoded
     @POST(HttpConstant.URL_SCAN_Goods_List)
     fun  queryGoodList(@Header("token")  token:String,@Field("NextSN")NextSN:Int)  : retrofit2.Call<GoodList>
+    @FormUrlEncoded
+    @POST(HttpConstant.URL_SCAN_LOT_UP)
+    fun  queryUpload(@Header("token")  token:String,
+    @Field("LotSN")LotSN:String, @Field("LotNo")LotNo:String,
+    @Field("LotName")LotName:String,
+    @Field("Stamp")Stamp:String,
+    @Field("Status")Status:String,
+    @Field("Param []")Param:List<JSONObject>)  : retrofit2.Call<BaseModel>
 
     @POST(HttpConstant.URL_SCAN_LOT_UP)
-    fun  queryUpload(@Header("token")  token:String)  : retrofit2.Call<BaseModel>
+    fun  queryUpload(@Header("token")  token:String,@Body upbody: UploadLotbean)  : retrofit2.Call<BaseModel>
 }

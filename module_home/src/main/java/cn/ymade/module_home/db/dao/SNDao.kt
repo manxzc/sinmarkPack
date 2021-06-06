@@ -44,6 +44,7 @@ interface SNDao {
     fun getAllByLotSN(lotSN:String): List<SNBean>
 
 
+
     @Query("SELECT * FROM SNBean where LotSN=:lotSN and upload=:uploadCode and Status=1")
     fun getAllByLotSNAndUpcode(lotSN:String,uploadCode:Int): List<SNBean>
 

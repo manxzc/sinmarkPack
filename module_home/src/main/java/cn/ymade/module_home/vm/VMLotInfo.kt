@@ -36,28 +36,27 @@ class VMLotInfo:BaseViewModel() {
     var lotSnInfoAdapter= LotInfoSnAdapter(snList,object : CallBack<SNBean> {
         override fun callBack(data: SNBean) {
             Log.i(TAG, " callBack: data "+data.toString())
-            data.LotSN=""
-            data.ModifyTime=CommUtil.getCurrentTimeYMD()
-            data.out=0
+
 
             Thread{
                 if (data.upload==2) { //如果上传过 需要存储 删除的数据
-                    val deletelis=  DataBaseManager.db. sndeleteSnDao().searchNotDeleteBySnAndLotSN(data!!.SN,data!!.LotSN)
+                    val deletelis = DataBaseManager.db.sndeleteSnDao()
+                        .searchNotDeleteBySnAndLotSN(data!!.SN, data!!.LotSN)
                     if (deletelis.isNullOrEmpty()) {
                         var sndeleteBean = SNDeleteByLotBean()
-                        sndeleteBean.LotSN=data!!.LotSN
-                        sndeleteBean.SN=data!!.SN
-                        sndeleteBean.ModifyTime=CommUtil.getCurrentTimeYMD()
+                        sndeleteBean.LotSN = data!!.LotSN
+                        sndeleteBean.SN = data!!.SN
+                        sndeleteBean.ModifyTime = CommUtil.getCurrentTimeYMD()
                         DataBaseManager.db.sndeleteSnDao().insert(sndeleteBean)
-                    }else{
-                        deletelis[0].ModifyTime=CommUtil.getCurrentTimeYMD()
+                    } else {
+                        deletelis[0].ModifyTime = CommUtil.getCurrentTimeYMD()
                         DataBaseManager.db.sndeleteSnDao().insert(deletelis[0])
                     }
 
-                }else{
-
                 }
-
+                data.LotSN=""
+                data.ModifyTime=CommUtil.getCurrentTimeYMD()
+                data.out=0
                 data.upload=0
 
                 DataBaseManager.db.snDao().updateSN(data)

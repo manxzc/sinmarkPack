@@ -23,7 +23,7 @@ class SyncActvity :BaseActivity<VMSync,ActivitySyncBinding>() {
     }
 
     override fun processLogic() {
-
+        mViewModel!!.initAct(this)
         setTopTitle("同步")
     }
 
@@ -58,7 +58,7 @@ class SyncActvity :BaseActivity<VMSync,ActivitySyncBinding>() {
                     niceDialog?.dismiss()
                 }
                 holder.getView<View>(R.id.dialog_promapt_ack).setOnClickListener {
-                    if (type==1)mViewModel?.download(this@SyncActvity)else mViewModel?.upload(this@SyncActvity)
+                    if (type==1)mViewModel?.download(this@SyncActvity)else mViewModel?.upload()
                     niceDialog?.dismiss()
                     showProgress("请稍后~")
                 }
