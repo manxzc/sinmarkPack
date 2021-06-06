@@ -1,9 +1,11 @@
 package cn.ymade.module_home.ui
 
+import android.content.Intent
 import android.text.TextUtils
 import cn.ymade.module_home.R
 import cn.ymade.module_home.common.Constant
 import cn.ymade.module_home.databinding.ActivityCreateOutBinding
+import cn.ymade.module_home.db.beans.LotDataBean
 import cn.ymade.module_home.homebase.ScanBaseActivity
 import cn.ymade.module_home.vm.VMCraeteOutLot
 import com.zcxie.zc.model_comm.callbacks.CallBack
@@ -20,7 +22,8 @@ import com.zcxie.zc.model_comm.util.LiveDataBus
 class CreateOutLotActivity : ScanBaseActivity<VMCraeteOutLot,ActivityCreateOutBinding>() {
 
     override fun loadCoded(scanCode: String) {
-        mViewModel?.addScan(scanCode)
+//        mViewModel?.addScan(scanCode)
+        mBinding!!.noTv.setText(scanCode)
     }
 
     override fun getLayoutId(): Int {
@@ -51,10 +54,11 @@ class CreateOutLotActivity : ScanBaseActivity<VMCraeteOutLot,ActivityCreateOutBi
             }
 
             showProgress("保存中")
-            mViewModel!!.commit(No,name,object : CallBack<String> {
-                override fun callBack(data: String) {
+            mViewModel!!.commit(No,name,object : CallBack<LotDataBean> {
+                override fun callBack(data: LotDataBean) {
                     LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
                     hideProgress()
+                    startActivity(Intent( this@CreateOutLotActivity, LotInfoActivity::class.java).putExtra("selectLot",data).putExtra("showChange",1))
                     finish()
                 }
             })

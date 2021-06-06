@@ -136,7 +136,6 @@
                             android:layout_marginRight="@dimen/size_6dp"
                             android:layout_weight="1"
                             android:singleLine="true"
-                            android:enabled="false"
                             android:background="@null"
                             android:gravity="right|center_vertical"
                             android:text="@{lotBean.LotName}"

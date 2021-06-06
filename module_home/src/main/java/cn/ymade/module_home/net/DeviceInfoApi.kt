@@ -33,13 +33,13 @@ interface DeviceInfoApi {
     fun  queryGoodList(@Header("token")  token:String,@Field("NextSN")NextSN:Int)  : retrofit2.Call<GoodList>
     @FormUrlEncoded
     @POST(HttpConstant.URL_SCAN_LOT_UP)
-    fun  queryUpload(@Header("token")  token:String,
-    @Field("LotSN")LotSN:String, @Field("LotNo")LotNo:String,
+    fun  queryUpload(@Header("token")  token:String,  // @Field("LotSN")LotSN:String, @Field("Status")Status:String,
+    @Field("LotNo")LotNo:String,
     @Field("LotName")LotName:String,
     @Field("Stamp")Stamp:String,
-    @Field("Status")Status:String,
     @Field("Param []")Param:List<JSONObject>)  : retrofit2.Call<BaseModel>
 
     @POST(HttpConstant.URL_SCAN_LOT_UP)
     fun  queryUpload(@Header("token")  token:String,@Body upbody: UploadLotbean)  : retrofit2.Call<BaseModel>
+
 }

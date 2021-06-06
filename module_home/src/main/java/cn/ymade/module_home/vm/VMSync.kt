@@ -110,9 +110,9 @@ class VMSync :BaseViewModel() {
                 var updb=UploadLotbean()
                 updb.LotName=lot.LotName
                 updb.LotNo=lot.LotNo
-                updb.LotSN=lot.LotSN
+//                updb.LotSN=lot.LotSN
                 updb.Stamp=lot.Stamp.toString()
-                updb.Status=lot.Status.toString()
+//                updb.Status=lot.Status.toString()
                 var hidePro= lot==listLot.get(listLot.size-1)
                 if (snList.size<=500){
                     upComm(snList, lot, updb,true,hidePro)

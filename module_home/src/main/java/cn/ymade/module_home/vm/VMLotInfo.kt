@@ -68,7 +68,7 @@ class VMLotInfo:BaseViewModel() {
         }
     })
     fun notyChange(){
-        this.lot!!.upload=0
+
         this.lot!!.Stamp=System.currentTimeMillis()
         this.lot!!.items=snList.size
         Thread{
@@ -99,6 +99,7 @@ class VMLotInfo:BaseViewModel() {
                 }
                 override fun onNext(t: String) {
                     snList.clear()
+                    lot!!.upload=0
                     notyChange()
                     act!!.finish()
                 }
@@ -168,6 +169,8 @@ class VMLotInfo:BaseViewModel() {
 
 //
          DataBaseManager.db. sndeleteSnDao().deleteList(DataBaseManager.db. sndeleteSnDao().searchNotDeleteBySnAndLotSN(scanCode,lot!!.LotSN))
+
+
             it.onNext(DataBaseManager.db.snDao().searchsingleNotDeleteBySn(scanCode))
 
         }.subscribeOn(Schedulers.io())
@@ -185,14 +188,27 @@ class VMLotInfo:BaseViewModel() {
                         sb.LotSN=lot!!.LotSN
                         sb.out=1
                         sb.isLocal=1
-
+                        sb.upload=1
                         snList.add(sb)
                         Thread{ DataBaseManager.db.snDao().insert(sb)}.start()
                     }else if (t[0].out!=0){
                         CommUtil.ToastU.showToast("此条码已被出库")
                         return
-                    }else
+                    }else {
+                        Thread{
+                            for ( sb in t){
+                                Log.i(TAG, "addScan: sb "+sb.Title)
+                                sb.LotSN=lot!!.LotSN
+                                sb.ModifyTime=CommUtil.getCurrentTimeYMD()
+                                sb.out=1
+                                sb.upload=1
+                            }
+
+                            DataBaseManager.db.snDao().insertList(t)
+                        }.start()
+
                         snList.addAll(t!!)
+                    }
 
                     notyChange()
                 }

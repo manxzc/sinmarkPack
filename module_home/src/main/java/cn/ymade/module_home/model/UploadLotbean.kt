@@ -10,10 +10,10 @@ import java.io.Serializable
  * description：
  */
 class UploadLotbean :Serializable {
-    var LotSN:String=""
+//    var LotSN:String=""
     var LotNo:String=""
     var LotName:String=""
     var Stamp:String=""
-    var Status:String=""
+//    var Status:String=""
     var Param:List<UploadSNBean>?=null
 }

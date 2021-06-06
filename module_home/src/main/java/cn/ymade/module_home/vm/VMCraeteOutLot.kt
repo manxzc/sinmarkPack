@@ -56,7 +56,7 @@ class VMCraeteOutLot :BaseViewModel() {
 
     }
     var isCommitting=false
-    fun commit(no:String,name:String,callBack: CallBack<String>){
+    fun commit(no:String,name:String,callBack: CallBack<LotDataBean>){
         Log.i(TAG, "commit: $LotSN")
         if (isCommitting){
             CommUtil.ToastU.showToast("操作进行中,请勿重复点击!!")
@@ -64,7 +64,19 @@ class VMCraeteOutLot :BaseViewModel() {
         }
         isCommitting=true
 
-        Observable.create<String> {
+        Observable.create<LotDataBean> {
+
+          if ( !DataBaseManager.db.lotDao().getAllByLotNo(no).isNullOrEmpty()) {
+              act!!.runOnUiThread {
+                  act!!.hideProgress()
+                  CommUtil.ToastU.showToast("批号已存在!!")
+                   isCommitting=false
+
+              }
+              return@create
+          }
+
+
             for (sb in snList){
                 sb.LotSN= LotSN.toString()
                 sb.upload=1
@@ -79,14 +91,14 @@ class VMCraeteOutLot :BaseViewModel() {
             outLot.LotSN=LotSN.toString();
          DataBaseManager.db.lotDao().insert(outLot)
 //            Log.i(TAG, "commit: outLot $outLot  size "+DataBaseManager.db.lotDao().getAll().size)
-            it.onNext("SUCCESS")
+            it.onNext(outLot)
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(object : Observer<String>{
+            .subscribe(object : Observer<LotDataBean>{
                 override fun onSubscribe(d: Disposable?) {
                 }
 
-                override fun onNext(t: String) {
+                override fun onNext(t: LotDataBean) {
                     AppConfig.lotAutoSN.put(LotSN-9999)
                     isCommitting=false
                     callBack.callBack(t)

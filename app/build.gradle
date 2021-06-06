@@ -51,7 +51,10 @@ android {
     dataBinding {
         enabled = true
     }
-
+    packagingOptions {
+        exclude 'classes.dex'
+        exclude '**.**'
+    }
 }
 
 dependencies {

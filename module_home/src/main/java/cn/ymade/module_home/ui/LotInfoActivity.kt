@@ -32,11 +32,16 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
             finish()
             return
         }
+
+
         showTopEdit(true)
         initBtmOnlyMind("删除")
         ll_only_parent?.visibility= View.GONE
         mBinding?.lotBean=Lot
         mViewModel!!.initLotSn(Lot,mBinding!!.rv,this,)
+        if (intent.getIntExtra("showChange",0)==1){
+            onclickTopEdit()
+        }
     }
 
     override fun onclickTopEdit() {
