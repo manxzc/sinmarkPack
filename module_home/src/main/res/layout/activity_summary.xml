@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/size_16dp"
-                android:text="数量"
+                android:text="出库数量"
                 style="@style/commTextKey"></TextView>
 
             <TextView
@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/size_16dp"
-                android:text="类型"
+                android:text="货品类型"
                 style="@style/commTextKey"></TextView>
 
             <TextView

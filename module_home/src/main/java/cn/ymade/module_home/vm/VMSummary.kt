@@ -103,8 +103,8 @@ fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>
     }
     Log.e("TAG", "onClick: $starTime  $stopTime")
     Observable.create<SummaryData> {
-        val typeNum = DataBaseManager.db.snDao().getTitleNum() //所有数量
-        val allNum= DataBaseManager.db.snDao().getTimeAll(starTime,stopTime) //类型
+        val typeNum = DataBaseManager.db.snDao().getTitleNum(1) //所有数量
+        val allNum= DataBaseManager.db.snDao().getTimeAll(1,starTime,stopTime) //类型
         var homeTitleData= SummaryData(allNum,typeNum)
         it.onNext(homeTitleData)
     }.subscribeOn(Schedulers.io())
