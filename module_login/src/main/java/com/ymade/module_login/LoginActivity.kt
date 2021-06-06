@@ -34,7 +34,9 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                    CommUtil.ToastU.showToast("设备编号获取失败")
                    return@setOnClickListener
                }
+               showProgress("登录中..")
                mViewModel?.registerAndLogin(company,devId)?.observe(this, Observer {
+                   hideProgress()
                    if (TextUtils.isEmpty(it)) {
                      ARouter.getInstance().build("/home/homeActivity1").navigation()
                        finish()

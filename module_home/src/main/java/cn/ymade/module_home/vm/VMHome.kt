@@ -64,7 +64,6 @@ class VMHome :BaseViewModel() {
 
         }
 
-
     }
 
     fun getUserInfo(): MutableLiveData<DevInfoBean?>? {

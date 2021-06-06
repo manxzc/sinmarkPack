@@ -64,6 +64,7 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
 
      private var tv_TopTitle: TextView? = null
      private var backImg: ImageView? = null
+     private var setting_icon :ImageView?=null
      public fun setTopTitle(text: String?) {
          if (tv_TopTitle != null) {
              tv_TopTitle!!.text = text
@@ -75,12 +76,27 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
          backImg?.setOnClickListener {
              closeCurrentAct()
          }
+         setting_icon=findViewById(R.id.setting_icon)
+         setting_icon?.setOnClickListener {
+             onclickTopEdit()
+         }
      }
+     fun setTopEdit(resId:Int){
+             setting_icon?.setImageResource(resId)
+     }
+     fun showTopEdit(show :Boolean){
+         if (show)
+             setting_icon?.visibility=View.VISIBLE
+         else
+             setting_icon?.visibility=View.GONE
+     }
+     open fun onclickTopEdit(){}
 
 
      private var mid_tv: TextView? = null
-
+      var ll_only_parent:View?=null
      fun initBtmOnlyMind(text: String?){
+         ll_only_parent=findViewById(R.id.ll_only_parent)
          mid_tv=findViewById(R.id.mid_tv)
          text?.let {
              mid_tv!!.text = text

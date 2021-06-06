@@ -41,18 +41,18 @@ object DataBaseManager {
 
     private object Migration1 : Migration(1, 2) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            // 数据库的升级语句
-            database.execSQL("CREATE TABLE IF NOT EXISTS `depart` (`Depart` TEXT  NOT NULL,`current` INTEGER NOT NULL DEFAULT 0,  'Number' TEXT,PRIMARY KEY(`Depart`))")
-            database.execSQL("CREATE TABLE IF NOT EXISTS `staff` ('uid'  INTEGER PRIMARY KEY AUTOINCREMENT,`current` INTEGER NOT NULL DEFAULT 0, `Depart` TEXT, 'Staff' TEXT,'Phone' TEXT)")
+//            // 数据库的升级语句
+//            database.execSQL("CREATE TABLE IF NOT EXISTS `depart` (`Depart` TEXT  NOT NULL,`current` INTEGER NOT NULL DEFAULT 0,  'Number' TEXT,PRIMARY KEY(`Depart`))")
+//            database.execSQL("CREATE TABLE IF NOT EXISTS `staff` ('uid'  INTEGER PRIMARY KEY AUTOINCREMENT,`current` INTEGER NOT NULL DEFAULT 0, `Depart` TEXT, 'Staff' TEXT,'Phone' TEXT)")
 
         }
     }
 
     private object Migration2_3 : Migration(2, 3) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            // 数据库的升级语句
-            database.execSQL("CREATE TABLE IF NOT EXISTS `LotDataBean` (`LotSN` TEXT  NOT NULL,`LotNo` TEXT,`LotName` TEXT,`Stamp` INTEGER NOT NULL DEFAULT 0,`Status` INTEGER NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,  'LotNo' TEXT,PRIMARY KEY(`LotSN`))")
-            database.execSQL("CREATE TABLE IF NOT EXISTS `SNBean` ('SN'  TEXT NOT NULL ,`NO` INTEGER NOT NULL DEFAULT 0,`out` INTEGER NOT NULL DEFAULT 0 ,`Title` TEXT, 'LotSN' TEXT,'Phone' TEXT,`ModifyTime` Text,`Stamp` Status  NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(`SN`))")
+//            // 数据库的升级语句
+//            database.execSQL("CREATE TABLE IF NOT EXISTS `LotDataBean` (`LotSN` TEXT  NOT NULL,`items`INTEGER NOT NULL DEFAULT 0,`isLocal`INTEGER NOT NULL DEFAULT 0,`LotNo` TEXT,`LotName` TEXT,`Stamp` INTEGER NOT NULL DEFAULT 0,`Status` INTEGER NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,  'LotNo' TEXT,PRIMARY KEY(`LotSN`))")
+//            database.execSQL("CREATE TABLE IF NOT EXISTS `SNBean` ('SN'  TEXT NOT NULL , `NO` INTEGER NOT NULL DEFAULT 0,`out` INTEGER NOT NULL DEFAULT 0 ,`Title` TEXT, 'LotSN' TEXT,'Phone' TEXT,`ModifyTime` Text,`Stamp` Status  NOT NULL DEFAULT 1,`upload` INTEGER NOT NULL DEFAULT 0,PRIMARY KEY(`SN`))")
         }
     }
 }

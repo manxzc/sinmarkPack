@@ -14,5 +14,5 @@ interface LoginApi {
                    @Field("Code") company: String,
                    @Field("SN") SN: String,
                    @Field("UUID") UUID: String,
-                   @Field("Model") Model: String)  : Observable<LoginModel>
+                   @Field("Model") Model: String)  : retrofit2.Call<LoginModel>
 }

@@ -18,7 +18,7 @@ interface SNDao {
     @Query("SELECT * FROM SNBean where Status=1 ")
     fun getAllNotDelete(): List<SNBean>
 
-    @Query("SELECT * FROM SNBean where Status=1 and SN==:sn  limit 1")
+    @Query("SELECT * FROM SNBean where Status=1 and SN==:sn   limit 1")
     fun searchsingleNotDeleteBySn(sn:String): List<SNBean>
 
 
@@ -43,7 +43,8 @@ interface SNDao {
     @Query("SELECT * FROM SNBean where LotSN=:lotSN and Status=1")
     fun getAllByLotSN(lotSN:String): List<SNBean>
 
-    @Query("SELECT * FROM SNBean where LotSN=:lotSN and upload=:uploadCode")
+
+    @Query("SELECT * FROM SNBean where LotSN=:lotSN and upload=:uploadCode and Status=1")
     fun getAllByLotSNAndUpcode(lotSN:String,uploadCode:Int): List<SNBean>
 
     @Update

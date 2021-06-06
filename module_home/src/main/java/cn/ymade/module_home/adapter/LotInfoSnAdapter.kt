@@ -1,5 +1,6 @@
 package cn.ymade.module_home.adapter
 
+import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ItemOutlotInfoSnBinding
 import cn.ymade.module_home.databinding.ItemSimpleBinding
@@ -21,18 +22,27 @@ import com.zcxie.zc.model_comm.callbacks.CallBack
  */
 class LotInfoSnAdapter (val list: List<SNBean>, val callBack: CallBack<SNBean>) :
     BindBaseAdapter<SNBean>(list) {
+    var showDelete=true
     override fun getLayoutId(): Int {
         return R.layout.item_outlot_info_sn
+    }
+    fun showDelete(show:Boolean){
+        showDelete=show
     }
 
     override fun onBindViewHolder(holder: BindBaseViewHolder, position: Int) {
         var data=list[position]
         ( holder.binding as ItemOutlotInfoSnBinding).bean=data
         ( holder.binding as ItemOutlotInfoSnBinding).executePendingBindings()
-        ( holder.binding as ItemOutlotInfoSnBinding).assetSelectDelectIv.setOnClickListener {
-            callBack?.let {
-                it.callBack(data)
+        if (showDelete) {
+            (holder.binding as ItemOutlotInfoSnBinding).assetSelectDelectIv.visibility= View.VISIBLE
+            (holder.binding as ItemOutlotInfoSnBinding).assetSelectDelectIv.setOnClickListener {
+                callBack?.let {
+                    it.callBack(data)
+                }
             }
+        }else{
+            (holder.binding as ItemOutlotInfoSnBinding).assetSelectDelectIv.visibility= View.GONE
         }
     }
 }

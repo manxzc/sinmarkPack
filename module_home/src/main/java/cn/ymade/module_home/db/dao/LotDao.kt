@@ -16,6 +16,13 @@ interface LotDao {
     @Query("SELECT * FROM LotDataBean where Status=1")
     fun getAll(): List<LotDataBean>
 
+    @Query("SELECT * FROM LotDataBean where upload=:upStatus and Status=1")
+    fun getAllByLotUp(upStatus: Int): List<LotDataBean>
+
+    @Query("SELECT * FROM LotDataBean where LotNo=:lotN and upload=:upStatus and Status=1")
+    fun getAllByLotUpAndNo(upStatus: Int,lotN:String): List<LotDataBean>
+
+
     @Query("SELECT * FROM LotDataBean where LotNo=:lotN and Status=1")
     fun getAllByLotNo(lotN:String): List<LotDataBean>
 

@@ -69,8 +69,7 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
                         startActivity(new Intent(HomeActivity1.this,SNListActivity.class));
                         break;
                     case 2:
-                        //startIntentActivity(CommScanActivity.class,false,Constant.FROM_ACTION,CommScanActivity.FROM_RFID);
-                        CommUtil.ToastU.showToast("单据");
+                        startActivity(new Intent(HomeActivity1.this,LotActivity.class));
                         break;
                     case 3:
                         startActivity(new Intent(HomeActivity1.this,SNSearchActivity.class));

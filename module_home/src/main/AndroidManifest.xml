@@ -18,5 +18,7 @@
         <activity android:name=".ui.SimpSNActivity"></activity>
         <activity android:name=".ui.SNSearchActivity"></activity>
         <activity android:name=".ui.CreateOutLotActivity"></activity>
+        <activity android:name=".ui.LotActivity"></activity>
+        <activity android:name=".ui.LotInfoActivity"></activity>
     </application>
 </manifest>

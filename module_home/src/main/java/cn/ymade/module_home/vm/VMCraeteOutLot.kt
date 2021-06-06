@@ -39,6 +39,7 @@ class VMCraeteOutLot :BaseViewModel() {
         override fun callBack(data: SNBean?) {
             Log.i(TAG, " callBack: data "+data.toString())
            snList.remove(data)
+            outsideLis.remove(data!!.SN)
            noty()
         }
     })
@@ -46,7 +47,7 @@ class VMCraeteOutLot :BaseViewModel() {
         lotSnInfoAdapter.notifyDataSetChanged()
     }
 
-    var outLot=LotDataBean(LotSN.toString(),"","",System.currentTimeMillis(),1,0)
+    var outLot=LotDataBean()
     fun init(rv:RecyclerView,act:CreateOutLotActivity){
         this.act=act
         this.rv=rv
@@ -74,7 +75,10 @@ class VMCraeteOutLot :BaseViewModel() {
             outLot.Stamp=System.currentTimeMillis()
             outLot.LotName=name
             outLot.LotNo=no
-            DataBaseManager.db.lotDao().insert(outLot)
+            outLot.items=snList.size
+            outLot.LotSN=LotSN.toString();
+         DataBaseManager.db.lotDao().insert(outLot)
+//            Log.i(TAG, "commit: outLot $outLot  size "+DataBaseManager.db.lotDao().getAll().size)
             it.onNext("SUCCESS")
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -105,7 +109,7 @@ class VMCraeteOutLot :BaseViewModel() {
         outsideLis.forEach {
             if (it==scanCode)
             {
-                CommUtil.ToastU.showToast("此条码已添加过~！")
+                CommUtil.ToastU.showToast("此条码已添加过或已出库~！")
                 return
             }
         }
@@ -131,9 +135,10 @@ class VMCraeteOutLot :BaseViewModel() {
                             sb.Title="--"
                             sb.LotSN=LotSN.toString()
                             sb.out=1
+                            sb.isLocal=1
 
                         snList.add(sb)
-                    }else if (t[0].upload!=0){
+                    }else if (t[0].out!=0){
                         CommUtil.ToastU.showToast("此条码已被出库")
                         return
                     }else
