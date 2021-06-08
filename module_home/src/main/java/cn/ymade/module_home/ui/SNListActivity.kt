@@ -15,6 +15,7 @@ import com.zcxie.zc.model_comm.util.LiveDataBus
  * email：3104873490@qq.com
  * description：
  */
+//货品
 class SNListActivity :BaseActivity<VMSNList,ActivitySnListBinding>() {
     override fun getLayoutId(): Int {
         return R.layout.activity_sn_list

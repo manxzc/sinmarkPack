@@ -20,17 +20,27 @@ interface SNDao {
     @Query("SELECT * FROM SNBean where Status=1 ")
     fun getAllNotDelete(): List<SNBean>
 
+    @Query("SELECT DISTINCT Title FROM SNBean where Status=1 ")
+    fun getAllDifTitleNotDelete(): List<String>
+
+    @Query("SELECT DISTINCT Title FROM SNBean where Status=1 and Title like '%'|| :title|| '%'")
+    fun getAllDifTitleNotDeleteByTitle(title: String): List<String>
+
+    @Query("SELECT * FROM SNBean where Status=1 and Title=:title")
+    fun getAllNotDeleteByTitle(title: String): List<SNBean>
+
     @Query("SELECT * FROM SNBean where Status=1 and SN==:sn   limit 1")
     fun searchsingleNotDeleteBySn(sn:String): List<SNBean>
 
 
-    @Query("SELECT * FROM SNBean where Status=1 and (SN==:key or Title like '%'|| :key|| '%')")
+    @Query("SELECT * FROM SNBean where Status=1 and (Title==:key or Title like '%'|| :key|| '%')")
     fun searchAllNotDeleteBy(key:String): List<SNBean>
 
-    @Query("SELECT * FROM SNBean where out=:statusCode and Status=1 " )
-    fun getAllInOut(statusCode: Int): List<SNBean>
 
-    @Query("SELECT * FROM SNBean where out=:statusCode and Status=1 and (SN==:key or Title like '%'|| :key|| '%')")
+    @Query("SELECT * FROM SNBean where Title=:title and out=:statusCode and Status=1 " )
+    fun getAllInOut(title: String,statusCode: Int): List<SNBean>
+
+    @Query("SELECT * FROM SNBean where  out=:statusCode and Status=1 and (Title==:key or Title like '%'|| :key|| '%')")
     fun searchAllInOut(statusCode: Int,key:String): List<SNBean>
 
     @Query("SELECT COUNT(*) FROM SNBean WHERE out=:statusCode")
@@ -83,4 +93,7 @@ interface SNDao {
 
     @Query("SELECT *  FROM SNBean where Title in (SELECT  DISTINCT Title  FROM SNBean )and LotSN=:lotSn  and Status=1 ")   //
     fun testSubQuery(lotSn: String):  List<SNBean>
+
+    @Query("SELECT *  FROM SNBean where Title in (SELECT  DISTINCT Title  FROM SNBean )and LotSN=:lotSn  and Status=1 ")   //
+    fun queryTitle(lotSn: String):  List<SNBean>
 }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/size_12dp"
-        android:layout_marginTop="@dimen/size_16dp"
+        android:layout_marginTop="@dimen/size_6dp"
         android:layout_marginRight="@dimen/size_12dp"
         android:layout_marginBottom="@dimen/size_5dp"
         android:background="@drawable/shape_radius_10_white"
