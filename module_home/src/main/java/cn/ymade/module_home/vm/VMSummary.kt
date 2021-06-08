@@ -54,7 +54,7 @@ fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>
     }
 
     Observable.create<SummaryData> {
-        val typeNum = DataBaseManager.db.snDao().getTitleNum(1) //所有数量
+        val typeNum = DataBaseManager.db.snDao().getTitleNum(1,starTime,stopTime) //所有数量
         val allNum= DataBaseManager.db.snDao().getTimeAll(1,starTime,stopTime) //类型
         var homeTitleData= SummaryData(allNum,typeNum)
         it.onNext(homeTitleData)
