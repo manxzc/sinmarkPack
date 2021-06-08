@@ -7,6 +7,7 @@ import cn.ymade.module_home.model.UploadLotbean
 import com.zcxie.zc.model_comm.model.BaseModel
 import com.zcxie.zc.model_comm.net.HttpConstant
 import io.reactivex.rxjava3.core.Observable
+import org.json.JSONArray
 import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.*
@@ -34,10 +35,17 @@ interface DeviceInfoApi {
     @FormUrlEncoded
     @POST(HttpConstant.URL_SCAN_LOT_UP)
     fun  queryUpload(@Header("token")  token:String,  // @Field("LotSN")LotSN:String, @Field("Status")Status:String,
-    @Field("LotNo")LotNo:String,
-    @Field("LotName")LotName:String,
-    @Field("Stamp")Stamp:String,
-    @Field("Param []")Param:List<JSONObject>)  : retrofit2.Call<BaseModel>
+                     @Field("LotNo")LotNo:String,
+                     @Field("LotName")LotName:String,
+                     @Field("Stamp")Stamp:String,
+                     @Field("Param[]")Param:@JvmSuppressWildcards List<JSONObject>)  : retrofit2.Call<BaseModel>
+    @FormUrlEncoded
+    @POST(HttpConstant.URL_SCAN_LOT_UP)
+    fun  queryUpload(@Header("token")  token:String,  // @Field("LotSN")LotSN:String, @Field("Status")Status:String,
+                     @Field("LotNo")LotNo:String,
+                     @Field("LotName")LotName:String,
+                     @Field("Stamp")Stamp:String,
+                     @Field("Param")P:JSONArray,)  : retrofit2.Call<BaseModel>
 
     @POST(HttpConstant.URL_SCAN_LOT_UP)
     fun  queryUpload(@Header("token")  token:String,@Body upbody: UploadLotbean)  : retrofit2.Call<BaseModel>

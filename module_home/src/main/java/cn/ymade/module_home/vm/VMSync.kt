@@ -100,51 +100,53 @@ class VMSync :BaseViewModel() {
                 })
                 return@Thread
             }
-
+            var hasUp=false //防止删除未同步的数据
             for ( lot in listLot){
-                Log.i(TAG, "upload: for lot  "+lot.LotSN)
+                hasUp=false
                 val snList= DataBaseManager.db.snDao().getAllByLotSN(lot.LotSN)
-                Log.i(TAG, "upload: snList size "+snList.size)
                 val deleteList= DataBaseManager.db.sndeleteSnDao().getAllByLotSN(lot.LotSN)
-                Log.i(TAG, "upload: deleteList size "+deleteList.size)
                 var updb=UploadLotbean()
                 updb.LotName=lot.LotName
                 updb.LotNo=lot.LotNo
-//                updb.LotSN=lot.LotSN
                 updb.Stamp=lot.Stamp.toString()
-//                updb.Status=lot.Status.toString()
                 var hidePro= lot==listLot.get(listLot.size-1)
-                if (snList.size<=500){
-                    upComm(snList, lot, updb,true,hidePro)
-                }else{
-                    var splitList=  CommUtil.splitList(snList,500)
-                    Log.i(TAG, "upload: 切割 splitList size  "+splitList.size)
-                    for (list in splitList){
-                        if (list==splitList.get(splitList.size-1)){
-                            upComm(list, lot, updb,true,hidePro)
-                        }else
-                        upComm(list, lot, updb,false,hidePro)
+                if (snList.size>0) {
+                    hasUp=true
+                    if (snList.size <= 500) {
+                        upComm(snList, lot, updb, true, hidePro)
+                    } else {
+                        var splitList = CommUtil.splitList(snList, 500)
+//                        Log.i(TAG, "upload: 切割 splitList size  " + splitList.size)
+                        for (list in splitList) {
+                            if (list == splitList.get(splitList.size - 1)) {
+                                upComm(list, lot, updb, true, hidePro)
+                            } else
+                                upComm(list, lot, updb, false, hidePro)
+                        }
                     }
                 }
-
-                if (deleteList.size<=500){
-                    upDelete(deleteList, lot, updb,true,hidePro)
-                }else {
-                    var splitList=  CommUtil.splitList(deleteList,500)
-                    Log.i(TAG, "upload: 切割 splitList size  "+splitList.size)
-                    for (list in splitList){
-                        if (list==splitList.get(splitList.size-1)){
-                            upDelete(list, lot, updb,true,hidePro)
-                        }else
-                            upDelete(list, lot, updb,false,hidePro)
+                if(deleteList.size>0) {
+                    hasUp=true
+                    if (deleteList.size <= 500) {
+                        upDelete(deleteList, lot, updb, true, hidePro)
+                    } else {
+                        var splitList = CommUtil.splitList(deleteList, 500)
+//                        Log.i(TAG, "upload: 切割 splitList size  " + splitList.size)
+                        for (list in splitList) {
+                            if (list == splitList.get(splitList.size - 1)) {
+                                upDelete(list, lot, updb, true, hidePro)
+                            } else
+                                upDelete(list, lot, updb, false, hidePro)
+                        }
                     }
+                }
+                if (!hasUp){  //未同步的空单 也上传
+                    upComm(snList, lot, updb, true, hidePro)
                 }
 
             }
 
         }.start()
-
-
     }
 
     private fun upComm(
@@ -152,19 +154,15 @@ class VMSync :BaseViewModel() {
         lot: LotDataBean,
         updb: UploadLotbean,isEnd:Boolean,hidePro:Boolean
     ) {
-        var upsnList = mutableListOf<UploadSNBean>()
+        var jar=JSONArray()
         for (i in snList) {
-            var upsnb = UploadSNBean()
-            upsnb.ModifyTime = i.ModifyTime
-            upsnb.SN = i.SN
-            upsnb.Status = i.Status.toString()
-            upsnList.add(upsnb)
+            var jso=JSONObject();
+            jso.put("SN",i.SN)
+            jso.put("Status",i.Status)
+            jar.put(jso)
         }
-        Log.i(
-            TAG,
-            "upload:  lot " + lot.LotSN + " " + lot.LotNo + " " + lot.LotName + " " + lot.Stamp + " " + lot.Status + " "
-        )
-        updb.Param = upsnList
+        Log.i(TAG, "upload:  lot " + lot.LotSN + " " + lot.LotNo + " " + lot.LotName + " " + lot.Stamp + " " + lot.Status + " jsa "+jar.toString())
+        updb.sS=jar
         uploadLot(lot,updb,snList,null,isEnd,hidePro)
     }
 
@@ -173,28 +171,23 @@ class VMSync :BaseViewModel() {
         lot: LotDataBean,
         updb: UploadLotbean,isEnd:Boolean,hidePro:Boolean
     ) {
-        var upsnList = mutableListOf<UploadSNBean>()
+        var jar=JSONArray()
         for (i in deleteList) {
-            var upsnb = UploadSNBean()
-            upsnb.ModifyTime = i.ModifyTime
-            upsnb.SN = i.SN
-            upsnb.Status = i.Status.toString()
-            upsnList.add(upsnb)
+                var jso=JSONObject();
+                jso.put("SN",i.SN)
+                jso.put("Status",i.Status)
+                jar.put(jso)
         }
-        Log.i(
-            TAG,
-            "upload:  deleteList lot " + lot.LotSN + " " + lot.LotNo + " " + lot.LotName + " " + lot.Stamp + " " + lot.Status + " "
-        )
-        updb.Param = upsnList
+        Log.i(TAG, "upload:  deleteList lot " + lot.LotSN + " " + lot.LotNo + " " + lot.LotName + " " + lot.Stamp + " " + lot.Status + " ")
+        updb.sS=jar
         uploadLot(lot,updb,null,deleteList,isEnd,hidePro)
     }
-
 
     fun uploadLot(  lot: LotDataBean,upbd: UploadLotbean,snList: List<SNBean>?, deleteList: List<SNDeleteByLotBean>?,isEnd:Boolean,hidePro:Boolean){
         RetrofitManager.retrofit
             .create(DeviceInfoApi::class.java)
             .queryUpload(AppConfig.Token.get()
-                ,upbd)
+                ,upbd.LotNo,upbd.LotName,upbd.Stamp,upbd.sS!!)
             .enqueue(object :Callback<BaseModel> {
                 override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
 

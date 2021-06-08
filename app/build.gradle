@@ -33,6 +33,10 @@ android {
                 arg("AROUTER_GENERATE_DOC", "enable")
             }
         }
+//        multiDexEnabled true
+//        ndk {
+//            abiFilters "armeabi-v7a"
+//        }
     }
 
     buildTypes {
@@ -50,10 +54,6 @@ android {
     }
     dataBinding {
         enabled = true
-    }
-    packagingOptions {
-        exclude 'classes.dex'
-        exclude '**.**'
     }
 }
 

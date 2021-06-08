@@ -24,4 +24,5 @@ public class LotDataBean implements Serializable {
     public int items= 0;
     public int Status=1; //默认为1 ，0表示删除
     public int upload=0;   //默认为0  1 已上传
+    public String staff;
 }

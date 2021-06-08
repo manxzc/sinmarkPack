@@ -8,11 +8,10 @@ import cn.ymade.module_home.R;
  */
 public class Constant {
 
-    public static String[] menuName = {"货品", "单据",  "查询","条码",  "汇总",  "出库",  "同步",  "人员"};
-    public static int[] menuIconResId = {R.drawable.baoguofahuo,R.drawable.xinwenzixun, R.drawable.saomiao,
-            R.drawable.ziyuan,R.drawable.bingtu, R.drawable.peizaizhuangche,
-            R.drawable.tongbu, R.drawable.yonghu
-
+    public static String[] menuName = {"查询", "单据", "出库", "货品","条码",  "同步", "汇总",  "人员"};
+    public static int[] menuIconResId = { R.drawable.ic_menu_scan,R.drawable.ic_menu_lot,  R.drawable.ic_menu_cart,
+            R.drawable.ic_menu_goods, R.drawable.ic_menu_asset,   R.drawable.ic_menu_sync,
+            R.drawable.ic_menu_summary, R.drawable.ic_menu_staff
     };
 
     public static final int SERVER_INPUT_TYPE_ADDRESS=1;

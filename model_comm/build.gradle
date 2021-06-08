@@ -58,10 +58,6 @@ android {
     dataBinding {
         enabled true
     }
-    packagingOptions {
-        exclude 'classes.dex'
-        exclude '**.**'
-    }
 }
 
 dependencies {
@@ -79,7 +75,10 @@ dependencies {
     api"com.github.bumptech.glide:glide:4.11.0"
     // Glide图片变换库
     api 'jp.wasabeef:glide-transformations:4.0.1'
-    api 'com.tencent:mmkv-static:1.2.8'
+
+    // mmkv   relinker
+    api 'com.tencent:mmkv-static:1.2.9'
+    api 'com.getkeepsafe.relinker:relinker:1.4.3'
 
     //ARouter的api
     api 'com.alibaba:arouter-api:1.5.1'

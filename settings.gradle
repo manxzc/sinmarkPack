@@ -1,6 +1,5 @@
 include ':app'
-
-include ':module_login'
-include ':model_comm'
 rootProject.name = "XjStock"
+include ':model_comm'
+include ':module_login'
 include ':module_home'

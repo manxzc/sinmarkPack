@@ -88,7 +88,8 @@ class VMCraeteOutLot :BaseViewModel() {
             outLot.LotName=name
             outLot.LotNo=no
             outLot.items=snList.size
-            outLot.LotSN=LotSN.toString();
+            outLot.LotSN=LotSN.toString()
+            outLot.staff=AppConfig.staff.get()
          DataBaseManager.db.lotDao().insert(outLot)
 //            Log.i(TAG, "commit: outLot $outLot  size "+DataBaseManager.db.lotDao().getAll().size)
             it.onNext(outLot)

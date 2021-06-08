@@ -1,5 +1,7 @@
 package cn.ymade.module_home.model
 
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.Serializable
 
 /**
@@ -14,6 +16,5 @@ class UploadLotbean :Serializable {
     var LotNo:String=""
     var LotName:String=""
     var Stamp:String=""
-//    var Status:String=""
-    var Param:List<UploadSNBean>?=null
+    var sS:JSONArray?=null
 }

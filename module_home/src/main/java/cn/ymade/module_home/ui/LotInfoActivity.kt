@@ -13,12 +13,11 @@ import com.zcxie.zc.model_comm.util.LiveDataBus
 /**
  * @author zc.xie
  * @date 2021/6/6 0006.
- * GitHub：
+ * GitHub：xzc
  * email：3104873490@qq.com
  * description：
  */
 class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
-
 
     var isChange=false
     override fun getLayoutId(): Int {
@@ -33,26 +32,27 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
             return
         }
 
-
         showTopEdit(true)
-        initBtmOnlyMind("删除")
-        ll_only_parent?.visibility= View.GONE
+        initBtmOnlyMind("上传")
         mBinding?.lotBean=Lot
         mViewModel!!.initLotSn(Lot,mBinding!!.rv,this,)
-        if (intent.getIntExtra("showChange",0)==1){
-            onclickTopEdit()
-        }
+
     }
 
     override fun onclickTopEdit() {
         super.onclickTopEdit()
+        mViewModel?.addScan("1000008")
+        mViewModel?.addScan("1000009")
         isChange=!isChange
         if(isChange){
             ll_only_parent?.visibility= View.VISIBLE
             setTopEdit(R.drawable.ic_save)
+            initBtmOnlyMind("删除")
+            mViewModel?.addScan("1000007")
         }else{
             setTopEdit(R.drawable.edit_icon)
             ll_only_parent?.visibility= View.GONE
+            initBtmOnlyMind("上传")
         }
         mViewModel!!.showDelete(isChange)
 
@@ -68,13 +68,17 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
 
     override fun clickOnlyMind() {
         super.clickOnlyMind()
-        mViewModel!!.deletLot()
+        if (getBtmOnlyMindText()=="上传"){
+            mViewModel?.upLoadLotInfo()
+        }else if (getBtmOnlyMindText()=="删除"){
+            mViewModel?.upLoadLotInfo()
+        }
     }
 
     override fun loadCoded(scanCode: String) {
-        if (!isChange)
-            return
         mViewModel?.addScan(scanCode)
-
+    }
+    fun refresh(difTitleCount:String){
+        mBinding!!.titleDifCount.text= "型号种类   $difTitleCount"
     }
 }

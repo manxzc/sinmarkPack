@@ -94,7 +94,7 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
 
 
      private var mid_tv: TextView? = null
-      var ll_only_parent:View?=null
+     var ll_only_parent:View?=null
      fun initBtmOnlyMind(text: String?){
          ll_only_parent=findViewById(R.id.ll_only_parent)
          mid_tv=findViewById(R.id.mid_tv)
@@ -106,6 +106,10 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
          }
      }
      open fun clickOnlyMind(){}
+
+     fun getBtmOnlyMindText():String{
+         return mid_tv?.text.toString()
+     }
 
      fun closeCurrentAct(){
          finish()

@@ -10,7 +10,7 @@ class HttpConstant {
         //员工列表
         const val URL_PDA_STAFF= "$BASE_URL/PACK_Staff/Index"
         //出库单上传
-        const val URL_SCAN_LOT_UP= "$BASE_URL/SCAN_Lot/Update"
+        const val URL_SCAN_LOT_UP= "$BASE_URL/PACK_Lot/Update"
         //出库单删除
         const val URL_SCAN_LOT_DEL= "$BASE_URL/SCAN_Lot/Update"
 

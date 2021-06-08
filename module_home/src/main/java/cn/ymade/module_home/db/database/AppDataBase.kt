@@ -13,7 +13,7 @@ import cn.ymade.module_home.db.dao.*
  * email：3104873490@qq.com
  * description：
  */
-@Database(entities = [DevInfoBean::class,DepartBean::class,StaffBean::class,LotDataBean::class,SNBean::class,SNDeleteByLotBean::class], version = 3 ,exportSchema = false)
+@Database(entities = [DevInfoBean::class,DepartBean::class,StaffBean::class,LotDataBean::class,SNBean::class,SNDeleteByLotBean::class], version = 4 ,exportSchema = false)
 abstract class AppDataBase :RoomDatabase(){
     abstract fun devinfoDao(): DevInfoDao
     abstract fun departStaffDao(): DepartStaffDao

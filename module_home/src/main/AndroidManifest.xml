@@ -10,16 +10,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.HomeActivity1"></activity>
-        <activity android:name=".ui.SettingsActivity"></activity>
-        <activity android:name=".ui.StaffActivity"></activity>
-        <activity android:name=".ui.SyncActvity"></activity>
-        <activity android:name=".ui.SNListActivity"></activity>
-        <activity android:name=".ui.SimpSNActivity"></activity>
-        <activity android:name=".ui.SNSearchActivity"></activity>
-        <activity android:name=".ui.CreateOutLotActivity"></activity>
-        <activity android:name=".ui.LotActivity"></activity>
-        <activity android:name=".ui.LotInfoActivity"></activity>
-        <activity android:name=".ui.SummaryActivity"></activity>
+        <activity android:name=".ui.HomeActivity1"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SettingsActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.StaffActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SyncActvity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SNListActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SimpSNActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SNSearchActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.CreateOutLotActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.LotActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.LotInfoActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".ui.SummaryActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 </manifest>

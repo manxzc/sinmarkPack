@@ -66,25 +66,25 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
             public void callBack(HomeMenuBean obj) {
                 switch (obj.type) {
                     case 1:
-                        startActivity(new Intent(HomeActivity1.this,SNListActivity.class));
+                        startActivity(new Intent(HomeActivity1.this, SNSearchActivity.class));
                         break;
                     case 2:
                         startActivity(new Intent(HomeActivity1.this,LotActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(HomeActivity1.this,SNSearchActivity.class));
+                        startActivity(new Intent(HomeActivity1.this, CreateOutLotActivity.class));
                         break;
                     case 4:
-                        startActivity(new Intent(HomeActivity1.this,SimpSNActivity.class));
+                        startActivity(new Intent(HomeActivity1.this,SNListActivity .class));
                         break;
                     case 5:
-                        startActivity(new Intent(HomeActivity1.this,SummaryActivity.class));
+                        startActivity(new Intent(HomeActivity1.this,SimpSNActivity.class));
                         break;
                     case 6:
-                        startActivity(new Intent(HomeActivity1.this,CreateOutLotActivity.class));
+                        startActivity(new Intent(HomeActivity1.this,SyncActvity .class));
                         break;
                     case 7:
-                        startActivity(new Intent(HomeActivity1.this,SyncActvity.class));
+                        startActivity(new Intent(HomeActivity1.this,SummaryActivity .class));
                         break;
                     case 8:
                         startActivity(new Intent(HomeActivity1.this,StaffActivity.class));
@@ -101,7 +101,6 @@ public class HomeActivity1 extends BaseActivity<VMHome,ActivityHomeBinding> {
         for (int i = 0; i < Constant.menuName.length; i++) {
             homeMenuBeanList.add(new HomeMenuBean(Constant.menuName[i], Constant.menuIconResId[i], i + 1));
         }
-
     }
 
     //加载数据
