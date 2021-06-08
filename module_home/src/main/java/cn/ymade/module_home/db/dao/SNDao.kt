@@ -75,4 +75,12 @@ interface SNDao {
 
     @Query("SELECT *  FROM SNBean where LotSN=:lotSn and Title=:title and Status=1")   //
     fun getTitleBeanByLotSN(lotSn: String,title:String):  List<SNBean>
+
+//    @Query("SELECT *  FROM SNBean where Title in (SELECT  DISTINCT Title  FROM SNBean )and LotSN=:lotSn  and Status=1 ")   //
+//    fun testSubQuery(lotSn: String):  List<SNBean>
+    @Query("SELECT *  FROM SNBean where Title in (SELECT  DISTINCT Title  FROM SNBean )and LotSN=:lotSn  and Status=1 ")   //
+    fun testSubQueryCursor(lotSn: String):  Cursor
+
+    @Query("SELECT *  FROM SNBean where Title in (SELECT  DISTINCT Title  FROM SNBean )and LotSN=:lotSn  and Status=1 ")   //
+    fun testSubQuery(lotSn: String):  List<SNBean>
 }

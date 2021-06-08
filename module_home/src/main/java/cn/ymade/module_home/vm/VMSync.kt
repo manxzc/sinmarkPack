@@ -187,7 +187,7 @@ class VMSync :BaseViewModel() {
         RetrofitManager.retrofit
             .create(DeviceInfoApi::class.java)
             .queryUpload(AppConfig.Token.get()
-                ,upbd.LotNo,upbd.LotName,upbd.Stamp,upbd.sS!!)
+                ,upbd.LotNo,upbd.LotName,lot.staff+"",upbd.Stamp,upbd.sS!!)
             .enqueue(object :Callback<BaseModel> {
                 override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
 

@@ -32,18 +32,13 @@ interface DeviceInfoApi {
     @FormUrlEncoded
     @POST(HttpConstant.URL_SCAN_Goods_List)
     fun  queryGoodList(@Header("token")  token:String,@Field("NextSN")NextSN:Int)  : retrofit2.Call<GoodList>
+
     @FormUrlEncoded
     @POST(HttpConstant.URL_SCAN_LOT_UP)
     fun  queryUpload(@Header("token")  token:String,  // @Field("LotSN")LotSN:String, @Field("Status")Status:String,
                      @Field("LotNo")LotNo:String,
                      @Field("LotName")LotName:String,
-                     @Field("Stamp")Stamp:String,
-                     @Field("Param[]")Param:@JvmSuppressWildcards List<JSONObject>)  : retrofit2.Call<BaseModel>
-    @FormUrlEncoded
-    @POST(HttpConstant.URL_SCAN_LOT_UP)
-    fun  queryUpload(@Header("token")  token:String,  // @Field("LotSN")LotSN:String, @Field("Status")Status:String,
-                     @Field("LotNo")LotNo:String,
-                     @Field("LotName")LotName:String,
+                     @Field("Staff")Staff:String,
                      @Field("Stamp")Stamp:String,
                      @Field("Param")P:JSONArray,)  : retrofit2.Call<BaseModel>
 

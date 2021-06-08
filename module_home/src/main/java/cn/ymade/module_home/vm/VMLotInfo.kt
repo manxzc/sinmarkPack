@@ -50,11 +50,11 @@ class VMLotInfo:BaseViewModel() {
     val snList= mutableListOf<SNBean>()
     val titleList= mutableListOf<SNTitleBean>()
 
-    var snTitleAdapter= SnTitleAdapter(titleList,object : CallBack<SNTitleBean> {
+    var snTitleAdapter= SnTitleAdapter(titleList, object : CallBack<SNTitleBean> {
         override fun callBack(data: SNTitleBean) {
-            Log.i(TAG, " callBack: snTitleAdapter "+data.toString())
-            Thread{
-                for ( snBean in data.snBeans) {
+            Log.i(TAG, " callBack: snTitleAdapter " + data.toString())
+            Thread {
+                for (snBean in data.snBeans) {
                     if (snBean.upload == 2) { //如果上传过 需要存储 删除的数据
                         val deletelis = DataBaseManager.db.sndeleteSnDao()
                             .searchNotDeleteBySnAndLotSN(snBean!!.SN, snBean!!.LotSN)
@@ -69,23 +69,27 @@ class VMLotInfo:BaseViewModel() {
                             DataBaseManager.db.sndeleteSnDao().insert(deletelis[0])
                         }
                     }
+
                     snBean.LotSN = ""
                     snBean.ModifyTime = CommUtil.getCurrentTimeYMD()
                     snBean.out = 0
                     snBean.upload = 0
                     DataBaseManager.db.snDao().updateSN(snBean)
 
-                    for ( sb in snList){
-                        if (sb.SN==snBean.SN){
-                            snList.remove(sb)
-                            break
-                        }
-                    }
-
                 }
             }.start()
-            for (sb in data.snBeans){
+            for (sb in data.snBeans) {
                 outsideLis.remove(sb.SN)
+            }
+            for (snBean in data.snBeans) {
+            for (sb in snList) {
+                Log.i(TAG, "callBack: sb.sn " + sb.SN + " snBean.SN " + snBean.SN)
+
+                if (sb.SN == snBean.SN) {
+                    snList.remove(sb)
+                    break
+                }
+            }
             }
             titleList.remove(data)
             notyChange()
@@ -116,23 +120,22 @@ class VMLotInfo:BaseViewModel() {
                 data.upload=0
                 DataBaseManager.db.snDao().updateSN(data)
 
-                for ( i in titleList.size-1  downTo 0){
-                    var stb=titleList[i]
-                    for ( sb in stb.snBeans) {
-                        if (sb.SN == data.SN) {
-                            stb.count=stb.count-1
-                            stb.snBeans.remove(sb)
-                            if (stb.snBeans.size==0){
-                                titleList.remove(stb)
-                            }
-                            break
-                        }
-                    }
-                }
-
             }.start()
             outsideLis.remove(data.SN)
             snList.remove(data)
+            for ( i in titleList.size-1  downTo 0){
+                var stb=titleList[i]
+                for ( sb in stb.snBeans) {
+                    if (sb.SN == data.SN) {
+                        stb.count=stb.count-1
+                        stb.snBeans.remove(sb)
+                        if (stb.snBeans.size==0){
+                            titleList.remove(stb)
+                        }
+                        break
+                    }
+                }
+            }
             notyChange()
         }
     })
@@ -141,13 +144,13 @@ class VMLotInfo:BaseViewModel() {
         lot!!.upload=0
         this.lot!!.Stamp=System.currentTimeMillis()
         this.lot!!.items=snList.size
+        Log.i(TAG, "notyChange: "+snList.size)
         Thread{
             DataBaseManager.db.lotDao().update(this.lot!!)
         }.start()
         lotSnInfoAdapter.notifyDataSetChanged()
         snTitleAdapter.notifyDataSetChanged()
-        LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
-        LiveDataBus.get().with("deleteLotOrSn").postValue("1")
+        act!!.sendChange=true
     }
 
     fun upLoadLotInfo(){
@@ -231,21 +234,22 @@ class VMLotInfo:BaseViewModel() {
         uploadLot(lot,updb,null,deleteList,isEnd,hidePro)
     }
 
+    //上传单据
     fun uploadLot(  lot: LotDataBean,upbd: UploadLotbean,snList: List<SNBean>?, deleteList: List<SNDeleteByLotBean>?,isEnd:Boolean,hidePro:Boolean){
         RetrofitManager.retrofit
                 .create(DeviceInfoApi::class.java)
                 .queryUpload(AppConfig.Token.get()
-                        ,upbd.LotNo,upbd.LotName,upbd.Stamp,upbd.sS!!)
+                        ,upbd.LotNo,upbd.LotName,lot.staff+"",upbd.Stamp,upbd.sS!!)
                 .enqueue(object : Callback<BaseModel> {
                     override fun onResponse(call: Call<BaseModel>, response: Response<BaseModel>) {
-
                         if (hidePro){
                             act!!.hideProgress()
                         }
                         Log.i(TAG, " uploadLot onResponse: "+response.toString())
                         if (response.isSuccessful&&response.body()!=null){
                             if (response.body()!!.code==1){
-                                LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
+                                CommUtil.ToastU.showToast("成功~")
+                                act!!.sendChange=true
                                 if (!snList.isNullOrEmpty()){
                                     Thread{
                                         for ( sb in snList){
@@ -266,7 +270,6 @@ class VMLotInfo:BaseViewModel() {
                                 if (!deleteList.isNullOrEmpty()){  //删除 本地数据库
                                     Thread{
                                         DataBaseManager.db.sndeleteSnDao().deleteList(deleteList)
-
                                     }.start()
                                 }
 
@@ -294,7 +297,7 @@ class VMLotInfo:BaseViewModel() {
                 })
     }
 
-
+    //删除单据
     fun deletLot(){
         act!!.showProgress("删除中")
         Observable.create<String> {
@@ -408,6 +411,7 @@ class VMLotInfo:BaseViewModel() {
 
     }
 
+    //添加货品sn
     fun addScan(scanCode:String){
 
         outsideLis.forEach {

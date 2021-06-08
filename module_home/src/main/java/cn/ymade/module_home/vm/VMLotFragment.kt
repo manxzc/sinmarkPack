@@ -72,6 +72,7 @@ class VMLotFragment :BaseViewModel() {
 
                 override fun onNext(t: List<LotDataBean>?) {
                     Log.i(TAG, "onNext: initData " + t?.size)
+                    snList.clear()
                     snList.addAll(t!!)
                     snAdapter.notifyDataSetChanged()
 
@@ -100,7 +101,7 @@ class VMLotFragment :BaseViewModel() {
 
     }
     fun reSearchData(){
-
+        Log.i(TAG, "reSearchData: ")
             doSearch(type,fragment!!)
     }
 }
