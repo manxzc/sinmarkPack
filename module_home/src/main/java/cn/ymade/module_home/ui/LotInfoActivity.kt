@@ -41,8 +41,8 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
 
     override fun onclickTopEdit() {
         super.onclickTopEdit()
-        mViewModel?.addScan("1000008")
-        mViewModel?.addScan("1000009")
+//        mViewModel?.addScan("1000008")
+//        mViewModel?.addScan("1000009")
         isChange=!isChange
         if(isChange){
             ll_only_parent?.visibility= View.VISIBLE
