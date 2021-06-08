@@ -7,4 +7,5 @@ class CrossApp :BaseApplication() {
     override fun onCreate() {
         super.onCreate()
     }
+
 }
