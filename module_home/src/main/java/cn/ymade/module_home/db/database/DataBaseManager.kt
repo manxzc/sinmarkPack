@@ -15,7 +15,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
  */
 object DataBaseManager {
     private const val DB_NAME = "packData.db"
-    private val MIGRATIONS = arrayOf(Migration1,Migration2_3,Migration3_4)
+    private val MIGRATIONS = arrayOf(Migration1_4,Migration1,Migration2_3,Migration3_4)
     private lateinit var application: Application
     val db: AppDataBase by lazy {
         Room.databaseBuilder(application.applicationContext, AppDataBase::class.java, DB_NAME)
@@ -59,7 +59,10 @@ object DataBaseManager {
         override fun migrate(database: SupportSQLiteDatabase) {
 //            // 数据库的升级语句
             database.execSQL("ALTER TABLE LotDataBean  ADD COLUMN staff TEXT")
-
-       }
+        }
+    }
+    private object Migration1_4 : Migration(1, 4) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+        }
     }
 }

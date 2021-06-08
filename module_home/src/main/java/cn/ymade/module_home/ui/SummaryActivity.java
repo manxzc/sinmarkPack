@@ -128,11 +128,15 @@ public class SummaryActivity extends BaseActivity<VMSummary, ActivitySummaryBind
     }
 
     private void loading(){
+        showProgress("查询中..");
         String start = getMBinding().tvStartTime.getText().toString();
         String stop = getMBinding().tvStopTime.getText().toString();
         getMViewModel().getNum(start,stop,new CallBack<SummaryData>() {
             @Override
             public void callBack(SummaryData data) {
+                hideProgress();
+                if (data==null)
+                    return;
                 getMBinding().allNum.setText(""+data.getAllNum());
                 getMBinding().typeNum.setText(""+data.getTypeNum());
             }

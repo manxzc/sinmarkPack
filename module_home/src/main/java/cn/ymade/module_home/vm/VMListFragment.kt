@@ -48,6 +48,7 @@ class VMListFragment :BaseViewModel() {
         this.fragment=fragment
         this.type=type
         rv.layoutManager= LinearLayoutManager(rv.context)
+        snAdapter.showDelete=false
         rv.adapter=snAdapter
         doSearch(type, fragment)
     }
@@ -58,17 +59,19 @@ class VMListFragment :BaseViewModel() {
             if (TextUtils.isEmpty(lastSearch)) {
                 var titleList = DataBaseManager.db.snDao().getAllDifTitleNotDelete()
                 for (title in titleList) {
-                  var stb=  SNTitleBean ()
+                    var stb=  SNTitleBean ()
                     var snLis= mutableListOf<SNBean>()
-                        when (type) {
-                            0 -> { snLis.addAll(DataBaseManager.db.snDao().getAllNotDeleteByTitle(title)) }
-                            1 -> { snLis.addAll( DataBaseManager.db.snDao().getAllInOut(title,0)) }
-                            2 -> { snLis.addAll(DataBaseManager.db.snDao().getAllInOut(title,1)) }
+                    when (type) {
+                        0 -> { snLis.addAll(DataBaseManager.db.snDao().getAllNotDeleteByTitle(title)) }
+                        1 -> { snLis.addAll( DataBaseManager.db.snDao().getAllInOut(title,0)) }
+                        2 -> { snLis.addAll(DataBaseManager.db.snDao().getAllInOut(title,1)) }
                     }
-                    stb.count=snLis.size
-                    stb.title=title
-                    stb.snBeans=snLis
-                    snList.add(stb)
+                    if (!snLis.isNullOrEmpty()) {
+                        stb.count = snLis.size
+                        stb.title = title
+                        stb.snBeans = snLis
+                        snList.add(stb)
+                    }
                 }
             }
             else{
@@ -81,10 +84,12 @@ class VMListFragment :BaseViewModel() {
                         1 -> { snLis.addAll( DataBaseManager.db.snDao().searchAllInOut(0,title)) }
                         2 -> { snLis.addAll(DataBaseManager.db.snDao().searchAllInOut(1,title)) }
                     }
-                    stb.count=snLis.size
-                    stb.title=title
-                    stb.snBeans=snLis
-                    snList.add(stb)
+                    if (!snLis.isNullOrEmpty()) {
+                        stb.count = snLis.size
+                        stb.title = title
+                        stb.snBeans = snLis
+                        snList.add(stb)
+                    }
                 }
             }
             it.onNext(snList)

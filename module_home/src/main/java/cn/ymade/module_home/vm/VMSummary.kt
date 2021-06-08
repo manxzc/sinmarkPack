@@ -41,14 +41,17 @@ fun getNum(starTime : String, stopTime : String, callback: CallBack<SummaryData>
     val nowDate = dateFormat.parse(nowdayTime)
 
     if ((d2!!.time)/1000 > (nowDate!!.time)/1000) {
+        callback.callBack(null)
         CommUtil.ToastU.showToast("查询时间不能超过今天")
         return
     }
     if (d3 > d4) {
+        callback.callBack(null)
         CommUtil.ToastU.showToast("查询时间不能超过30天")
         return
     }
     if (d3 < 0) {
+        callback.callBack(null)
         CommUtil.ToastU.showToast("结束时间不能小于开始时间")
         return
     }

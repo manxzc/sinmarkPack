@@ -74,7 +74,7 @@ interface SNDao {
     @Query("DELETE FROM SNBean ")
     fun deleteAll()
 
-    @Query("SELECT count(DISTINCT Title) FROM SNBean where out=:statusCode  and (ModifyTime) BETWEEN :startTime and :stopTime\"")
+    @Query("SELECT count(DISTINCT Title) FROM SNBean where out=:statusCode  and (ModifyTime) BETWEEN :startTime and :stopTime")
     fun getTitleNum(statusCode: Int,startTime:String ,stopTime:String):Int
 
     @Query("SELECT count(*) FROM SNBean where out=:statusCode and (ModifyTime) BETWEEN :startTime and :stopTime")
