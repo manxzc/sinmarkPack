@@ -48,7 +48,7 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
             ll_only_parent?.visibility= View.VISIBLE
             setTopEdit(R.drawable.ic_save)
             initBtmOnlyMind("删除")
-            mViewModel?.addScan("1000007")
+//            mViewModel?.addScan("1000007")
         }else{
             setTopEdit(R.drawable.edit_icon)
             ll_only_parent?.visibility= View.GONE
