@@ -1,7 +1,9 @@
 package cn.ymade.module_home.db.dao
 
+import android.database.Cursor
 import androidx.room.*
 import cn.ymade.module_home.db.beans.SNBean
+import cn.ymade.module_home.model.SNTitleBean
 
 /**
  * @author zc.xie
@@ -68,4 +70,9 @@ interface SNDao {
     @Query("SELECT count(*) FROM SNBean where out=:statusCode and (ModifyTime) BETWEEN :startTime and :stopTime")
     fun getTimeAll(statusCode: Int,startTime:String ,stopTime:String):Int
 
+    @Query("SELECT DISTINCT Title FROM SNBean where LotSN=:lotSn and Status=1")   //SNTitleBean
+    fun getAllTitleBeanByLotSN(lotSn: String):List<String>
+
+    @Query("SELECT *  FROM SNBean where LotSN=:lotSn and Title=:title and Status=1")   //
+    fun getTitleBeanByLotSN(lotSn: String,title:String):  List<SNBean>
 }

@@ -35,20 +35,35 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
         showTopEdit(true)
         initBtmOnlyMind("上传")
         mBinding?.lotBean=Lot
-        mViewModel!!.initLotSn(Lot,mBinding!!.rv,this,)
+        mViewModel!!.initLotSn(Lot,mBinding!!.rv,mBinding!!.rvTitle,this)
+
+
+        mBinding!!.tabSnList.setOnClickListener {
+            mBinding!!.rv.visibility=View.VISIBLE
+            mBinding!!.rvTitle.visibility=View.GONE
+            mBinding!!.tabSnList.setTextColor(resources.getColor(R.color.main_blue))
+            mBinding!!.tabTitleList.setTextColor(resources.getColor(R.color.color_666666))
+        }
+
+        mBinding!!.tabTitleList.setOnClickListener {
+            mBinding!!.rvTitle.visibility=View.VISIBLE
+            mBinding!!.rv.visibility=View.GONE
+            mBinding!!.tabTitleList.setTextColor(resources.getColor(R.color.main_blue))
+            mBinding!!.tabSnList.setTextColor(resources.getColor(R.color.color_666666))
+        }
 
     }
 
     override fun onclickTopEdit() {
         super.onclickTopEdit()
-//        mViewModel?.addScan("1000008")
-//        mViewModel?.addScan("1000009")
+        mViewModel?.addScan("1000008")
+        mViewModel?.addScan("1000009")
         isChange=!isChange
         if(isChange){
             ll_only_parent?.visibility= View.VISIBLE
             setTopEdit(R.drawable.ic_save)
             initBtmOnlyMind("删除")
-//            mViewModel?.addScan("1000007")
+            mViewModel?.addScan("1000007")
         }else{
             setTopEdit(R.drawable.edit_icon)
             ll_only_parent?.visibility= View.GONE
@@ -71,7 +86,7 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
         if (getBtmOnlyMindText()=="上传"){
             mViewModel?.upLoadLotInfo()
         }else if (getBtmOnlyMindText()=="删除"){
-            mViewModel?.upLoadLotInfo()
+            mViewModel?.deletLot()
         }
     }
 
@@ -79,6 +94,6 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
         mViewModel?.addScan(scanCode)
     }
     fun refresh(difTitleCount:String){
-        mBinding!!.titleDifCount.text= "型号种类   $difTitleCount"
+//        mBinding!!.titleDifCount.text= "型号种类   $difTitleCount"
     }
 }

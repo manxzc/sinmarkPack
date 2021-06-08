@@ -4,11 +4,13 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.ymade.module_home.adapter.LotInfoSnAdapter
+import cn.ymade.module_home.adapter.SnTitleAdapter
 import cn.ymade.module_home.common.Constant
 import cn.ymade.module_home.db.beans.LotDataBean
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.beans.SNDeleteByLotBean
 import cn.ymade.module_home.db.database.DataBaseManager
+import cn.ymade.module_home.model.SNTitleBean
 import cn.ymade.module_home.model.UploadLotbean
 import cn.ymade.module_home.net.DeviceInfoApi
 import cn.ymade.module_home.ui.LotInfoActivity
@@ -40,10 +42,56 @@ import retrofit2.Response
 class VMLotInfo:BaseViewModel() {
     var act:LotInfoActivity?=null
     var rv:RecyclerView?=null
+    var rvTitle:RecyclerView?=null
+
     var lot:LotDataBean?=null
     var lotSN:String=""
     val outsideLis=mutableListOf<String>()
     val snList= mutableListOf<SNBean>()
+    val titleList= mutableListOf<SNTitleBean>()
+
+    var snTitleAdapter= SnTitleAdapter(titleList,object : CallBack<SNTitleBean> {
+        override fun callBack(data: SNTitleBean) {
+            Log.i(TAG, " callBack: snTitleAdapter "+data.toString())
+            Thread{
+                for ( snBean in data.snBeans) {
+                    if (snBean.upload == 2) { //如果上传过 需要存储 删除的数据
+                        val deletelis = DataBaseManager.db.sndeleteSnDao()
+                            .searchNotDeleteBySnAndLotSN(snBean!!.SN, snBean!!.LotSN)
+                        if (deletelis.isNullOrEmpty()) {
+                            var sndeleteBean = SNDeleteByLotBean()
+                            sndeleteBean.LotSN = snBean!!.LotSN
+                            sndeleteBean.SN = snBean!!.SN
+                            sndeleteBean.ModifyTime = CommUtil.getCurrentTimeYMD()
+                            DataBaseManager.db.sndeleteSnDao().insert(sndeleteBean)
+                        } else {
+                            deletelis[0].ModifyTime = CommUtil.getCurrentTimeYMD()
+                            DataBaseManager.db.sndeleteSnDao().insert(deletelis[0])
+                        }
+                    }
+                    snBean.LotSN = ""
+                    snBean.ModifyTime = CommUtil.getCurrentTimeYMD()
+                    snBean.out = 0
+                    snBean.upload = 0
+                    DataBaseManager.db.snDao().updateSN(snBean)
+
+                    for ( sb in snList){
+                        if (sb.SN==snBean.SN){
+                            snList.remove(sb)
+                            break
+                        }
+                    }
+
+                }
+            }.start()
+            for (sb in data.snBeans){
+                outsideLis.remove(sb.SN)
+            }
+            titleList.remove(data)
+            notyChange()
+        }
+    })
+
     var lotSnInfoAdapter= LotInfoSnAdapter(snList,object : CallBack<SNBean> {
         override fun callBack(data: SNBean) {
             Log.i(TAG, " callBack: data "+data.toString())
@@ -68,15 +116,28 @@ class VMLotInfo:BaseViewModel() {
                 data.upload=0
                 DataBaseManager.db.snDao().updateSN(data)
 
+                for ( i in titleList.size-1  downTo 0){
+                    var stb=titleList[i]
+                    for ( sb in stb.snBeans) {
+                        if (sb.SN == data.SN) {
+                            stb.count=stb.count-1
+                            stb.snBeans.remove(sb)
+                            if (stb.snBeans.size==0){
+                                titleList.remove(stb)
+                            }
+                            break
+                        }
+                    }
+                }
+
             }.start()
             outsideLis.remove(data.SN)
             snList.remove(data)
             notyChange()
         }
     })
-    var titleDifList= mutableSetOf<String>()
+
     fun notyChange(){
-        titleDifList.clear()
         lot!!.upload=0
         this.lot!!.Stamp=System.currentTimeMillis()
         this.lot!!.items=snList.size
@@ -84,12 +145,9 @@ class VMLotInfo:BaseViewModel() {
             DataBaseManager.db.lotDao().update(this.lot!!)
         }.start()
         lotSnInfoAdapter.notifyDataSetChanged()
+        snTitleAdapter.notifyDataSetChanged()
         LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
         LiveDataBus.get().with("deleteLotOrSn").postValue("1")
-        for (sb in snList){
-            titleDifList.add(sb.Title)
-        }
-        act!!.refresh(titleDifList.size.toString())
     }
 
     fun upLoadLotInfo(){
@@ -269,23 +327,33 @@ class VMLotInfo:BaseViewModel() {
     fun showDelete(show:Boolean){
         lotSnInfoAdapter.showDelete(show)
         lotSnInfoAdapter.notifyDataSetChanged()
+        snTitleAdapter.showDelete(show)
+        snTitleAdapter.notifyDataSetChanged()
     }
-    fun initLotSn(lot: LotDataBean, rv: RecyclerView, act: LotInfoActivity){
+    fun initLotSn(lot: LotDataBean, rv: RecyclerView, rvTitle: RecyclerView, act: LotInfoActivity){
         this.lot=lot
         this.lotSN=lot.LotSN
         this.act=act
         this.rv=rv
+        this.rvTitle=rvTitle
         rv.layoutManager= LinearLayoutManager(rv.context)
         lotSnInfoAdapter.showDelete=false
         rv.adapter=lotSnInfoAdapter
+
+        rvTitle.layoutManager=LinearLayoutManager(rvTitle.context)
+        snTitleAdapter.showDelete=false
+        rvTitle.adapter=snTitleAdapter
         getInitData()
     }
 
     private fun getInitData() {
+        outsideLis.clear()
+        snList.clear()
+        titleList.clear()
+
         act?.showProgress("加载中")
         Observable.create<List<SNBean>> {
             it.onNext(DataBaseManager.db.snDao().getAllByLotSN(lot!!.LotSN))
-
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(object : Observer<List<SNBean>> {
@@ -295,18 +363,49 @@ class VMLotInfo:BaseViewModel() {
                     Log.i(TAG, "onNext: initData " + t?.size)
                     for (sb in t){
                         outsideLis.add(sb.SN)
-                        titleDifList.add(sb.Title)
                     }
                     snList.addAll(t!!)
                     lotSnInfoAdapter.notifyDataSetChanged()
                     act!!.hideProgress()
-                    act!!.refresh(titleDifList.size.toString())
                 }
                 override fun onError(e: Throwable?) {
                 }
                 override fun onComplete() {
                 }
             })
+
+
+        //查询 title
+        Observable.create<List<SNTitleBean>> {
+           var titles= DataBaseManager.db.snDao().getAllTitleBeanByLotSN(lot!!.LotSN)
+
+            Log.i(TAG, "getInitData: cursor "+titles.size)
+            for ( title in titles){
+                var sntB=  SNTitleBean()
+                var sbList=    DataBaseManager.db.snDao().getTitleBeanByLotSN(lot!!.LotSN,title)
+                sntB.title=title
+                sntB.snBeans=sbList
+                sntB.count=sbList.size
+                titleList.add(sntB)
+            }
+            it.onNext(titleList)
+
+        }.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(object : Observer<List<SNTitleBean>> {
+                override fun onSubscribe(d: Disposable?) {
+                }
+                override fun onNext(t: List<SNTitleBean>) {
+                    Log.i(TAG, "onNext: initData SNTitleBean  " + t?.size)
+                    snTitleAdapter.notifyDataSetChanged()
+                }
+                override fun onError(e: Throwable?) {
+                }
+                override fun onComplete() {
+                }
+            })
+
+
     }
 
     fun addScan(scanCode:String){
@@ -345,6 +444,13 @@ class VMLotInfo:BaseViewModel() {
                         sb.isLocal=1
                         sb.upload=1
                         snList.add(sb)
+                        for (stb in titleList){
+                            if (sb.Title==stb.title){
+                                stb.count=stb.count+1
+                                stb.snBeans.add(sb)
+                                break
+                            }
+                        }
                         Thread{ DataBaseManager.db.snDao().insert(sb)}.start()
                     }else if (t[0].out!=0){
                         CommUtil.ToastU.showToast("此条码已被出库")
@@ -360,7 +466,24 @@ class VMLotInfo:BaseViewModel() {
                             }
                             DataBaseManager.db.snDao().insertList(t)
                         }.start()
-
+                        for ( sb in t) {
+                            var existed=false
+                            for (stb in titleList) {
+                                if (sb.Title == stb.title) {
+                                    existed=true
+                                    stb.count = stb.count + 1
+                                    stb.snBeans.add(sb)
+                                    break
+                                }
+                            }
+                            if (!existed){
+                              var stb=  SNTitleBean ()
+                                stb.title=sb.Title
+                                stb.count=1
+                                stb.snBeans= mutableListOf(sb)
+                                titleList.add(stb)
+                            }
+                        }
                         snList.addAll(t!!)
                     }
 

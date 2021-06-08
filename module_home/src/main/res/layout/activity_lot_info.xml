@@ -190,13 +190,30 @@
                 </FrameLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
-                android:id="@+id/title_dif_count"
+                android:id="@+id/tab_sn_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/size_16dp"
                 android:text="货品列表"
+                android:textColor="@color/main_blue"
+                android:textSize="@dimen/size_16dp"
                 style="@style/create_operate_tab_margin"></TextView>
+
+                <TextView
+                    android:id="@+id/tab_title_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_16dp"
+                    android:layout_marginLeft="@dimen/size_24dp"
+                    android:text="货品类型"
+                    android:textColor="@color/color_666666"
+                    style="@style/create_operate_tab_margin"></TextView>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
@@ -205,6 +222,16 @@
                 android:layout_height="wrap_content">
 
             </androidx.recyclerview.widget.RecyclerView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_title"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="45dp"
+                android:layout_height="wrap_content">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/bottom_layout"

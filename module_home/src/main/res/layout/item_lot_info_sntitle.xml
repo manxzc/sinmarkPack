@@ -6,7 +6,7 @@
 
         <variable
             name="bean"
-            type="cn.ymade.module_home.db.beans.SNBean" />
+            type="cn.ymade.module_home.model.SNTitleBean" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:id="@+id/assets_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(bean.Title)}"
+                android:text="@{String.valueOf(bean.title)}"
                 android:layout_marginRight="@dimen/size_70dp"
                 android:textColor="@color/color_333333"
                 android:maxLines="1"
@@ -50,7 +50,7 @@
                 android:layout_below="@+id/assets_name"
                 android:layout_marginTop="4dp"
                 android:maxLines="1"
-                android:text="@{String.valueOf(bean.SN)}"
+                android:text="@{String.valueOf(bean.count)}"
                 tools:text="name"></TextView>
         </RelativeLayout>
     </LinearLayout>
