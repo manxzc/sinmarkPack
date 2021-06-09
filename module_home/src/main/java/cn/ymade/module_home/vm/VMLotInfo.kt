@@ -448,13 +448,23 @@ class VMLotInfo:BaseViewModel() {
                         sb.isLocal=1
                         sb.upload=1
                         snList.add(sb)
+                        var hasTitle=false;
                         for (stb in titleList){
                             if (sb.Title==stb.title){
                                 stb.count=stb.count+1
                                 stb.snBeans.add(sb)
+                                hasTitle=true
                                 break
                             }
                         }
+                        if (!hasTitle){
+                          var stb=  SNTitleBean ()
+                            stb.title=sb.Title
+                            stb.count+=1
+                            stb.snBeans= mutableListOf(sb)
+                            titleList.add(stb)
+                        }
+
                         Thread{ DataBaseManager.db.snDao().insert(sb)}.start()
                     }else if (t[0].out!=0){
                         CommUtil.ToastU.showToast("此条码已被出库")
