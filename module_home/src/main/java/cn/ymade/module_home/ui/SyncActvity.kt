@@ -34,6 +34,9 @@ class SyncActvity :BaseActivity<VMSync,ActivitySyncBinding>() {
     fun startUpLoad(v:View){
         createSyncDialog(2)
     }
+    fun syncStaff(v: View){
+        createSyncDialog(3)
+    }
 
     override fun findViewModelClass(): Class<VMSync> {
         return VMSync::class.java
@@ -48,9 +51,12 @@ class SyncActvity :BaseActivity<VMSync,ActivitySyncBinding>() {
                 if (type == 1) {
                     title = "下载"
                     subTitle = "下载货品数据 ~！"
-                } else {
+                } else if(type == 2) {
                     title = "上传"
-                    subTitle = "上传货品数据~！"
+                    subTitle = "批量上传出库单~！"
+                }else if(type == 3) {
+                    title = "同步"
+                    subTitle = "重新同步人员数据~！"
                 }
                 holder.setText(R.id.dialog_tittle_tv, title)
                 holder.setText(R.id.dialog_content_tv, subTitle)
@@ -58,7 +64,7 @@ class SyncActvity :BaseActivity<VMSync,ActivitySyncBinding>() {
                     niceDialog?.dismiss()
                 }
                 holder.getView<View>(R.id.dialog_promapt_ack).setOnClickListener {
-                    if (type==1)mViewModel?.download(this@SyncActvity)else mViewModel?.upload()
+                    if (type==1)mViewModel?.download(this@SyncActvity)else  if (type==2)mViewModel?.upload() else mViewModel?.syncStaff()
                     niceDialog?.dismiss()
                     showProgress("请稍后~")
                 }

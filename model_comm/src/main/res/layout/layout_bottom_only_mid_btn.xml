@@ -7,14 +7,22 @@
         android:background="@color/white"
         android:id="@+id/ll_only_parent"
         android:layout_height="@dimen/size_45dp">
-        <TextView
-            style="@style/bottom_btn_text"></TextView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></View>
         <TextView
             android:text="新增部门"
             android:background="@drawable/shape_radius_blue"
             android:id="@+id/mid_tv"
+            android:layout_height="34dp"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             style="@style/bottom_btn_text"></TextView>
-        <TextView
-            style="@style/bottom_btn_text"></TextView>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></View>
     </LinearLayout>
 </layout>

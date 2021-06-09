@@ -46,7 +46,7 @@ class VMSNSearch: BaseViewModel() {
      fun doSearch( ) {
         snList.clear()
         Observable.create<List<SNBean>> {
-                it.onNext(DataBaseManager.db.snDao().searchAllNotDeleteBy(lastSearch))
+                it.onNext(DataBaseManager.db.snDao().searchAllNotDeleteByMatchSN(lastSearch))
 
         }.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

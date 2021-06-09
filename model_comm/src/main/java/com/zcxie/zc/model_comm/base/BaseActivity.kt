@@ -8,7 +8,9 @@ import android.content.IntentFilter
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
@@ -23,6 +25,7 @@ import com.zcxie.zc.model_comm.R
 import com.zcxie.zc.model_comm.callbacks.CallBack
 import com.zcxie.zc.model_comm.util.CommUtil
 import com.zcxie.zc.model_comm.util.EditViewUtil
+
 
 //ViewDataBinding 是所有DataBinding的父类
 
@@ -212,5 +215,40 @@ import com.zcxie.zc.model_comm.util.EditViewUtil
      }
      open fun clickback(searchback: View?) {
          finish()
+     }
+     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+         if (ev.action == MotionEvent.ACTION_DOWN) {
+             val v = currentFocus
+             if (isShouldHideInput(v, ev)) { //点击editText控件外部
+                 val imm: InputMethodManager =
+                     getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                 if (imm != null) {
+                     assert(v != null)
+                     CommUtil.closeKeyboard(v) //软键盘工具类
+                     if (editText != null) {
+                         editText!!.clearFocus()
+                     }
+                 }
+             }
+             return super.dispatchTouchEvent(ev)
+         }
+         // 必不可少，否则所有的组件都不会有TouchEvent了
+         return window.superDispatchTouchEvent(ev) || onTouchEvent(ev)
+     }
+     var editText: EditText? = null
+
+     open fun isShouldHideInput(v: View?, event: MotionEvent): Boolean {
+         if (v != null && v is EditText) {
+             editText = v
+             val leftTop = intArrayOf(0, 0)
+             //获取输入框当前的location位置
+             v.getLocationInWindow(leftTop)
+             val left = leftTop[0]
+             val top = leftTop[1]
+             val bottom = top + v.getHeight()
+             val right = left + v.getWidth()
+             return !(event.x > left && event.x < right && event.y > top && event.y < bottom)
+         }
+         return false
      }
 }

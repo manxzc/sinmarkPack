@@ -5,13 +5,9 @@ import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.ymade.module_home.adapter.NewSNLIstSimpleAdapter
-import cn.ymade.module_home.adapter.SNLIstAdapter
-import cn.ymade.module_home.adapter.SNLIstSimpleAdapter
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.database.DataBaseManager
-import cn.ymade.module_home.ui.NewSimpSNActivity
-import cn.ymade.module_home.ui.SimpSNActivity
-import cn.ymade.module_home.ui.fragment.SNListFragment
+import cn.ymade.module_home.ui.SNFromTitleActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -27,26 +23,26 @@ import io.reactivex.rxjava3.schedulers.Schedulers
  * email：3104873490@qq.com
  * description：
  */
-class VMNewSimpleSN :BaseViewModel() {
+class VMSNFromTitle :BaseViewModel() {
 
     val snList= mutableListOf<SNBean>()
     var lastSearch:String=""
 
-    var act: NewSimpSNActivity?=null
+    var act: SNFromTitleActivity?=null
     var snAdapter= NewSNLIstSimpleAdapter(snList,object : CallBack<SNBean> {
         override fun callBack(data: SNBean?) {
             Log.i(TAG, " callBack: data "+data.toString())
         }
     })
 
-    fun initData(rv: RecyclerView, act: NewSimpSNActivity){
+    fun initData(rv: RecyclerView, act: SNFromTitleActivity){
         this.act=act
         rv.layoutManager= LinearLayoutManager(rv.context)
         rv.adapter=snAdapter
        // doSearch( act)
     }
 
-    private fun doSearch( act: NewSimpSNActivity) {
+    private fun doSearch( act: SNFromTitleActivity) {
         snList.clear()
         Observable.create<List<SNBean>> {
             if (TextUtils.isEmpty(lastSearch)) {
@@ -81,7 +77,7 @@ class VMNewSimpleSN :BaseViewModel() {
         Log.i("TAG", "getTabStr:  searchCount $searchCount")
         return  "总计:   ( $searchCount )  "
     }
-    fun updateUI(act: NewSimpSNActivity,t: List<SNBean>?){
+    fun updateUI(act: SNFromTitleActivity, t: List<SNBean>?){
         snList.addAll(t!!)
         snAdapter.notifyDataSetChanged()
         act.reloadTitle(getTabStr( snList.size))

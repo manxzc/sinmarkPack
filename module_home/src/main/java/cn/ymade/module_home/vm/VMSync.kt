@@ -6,6 +6,7 @@ import cn.ymade.module_home.db.beans.LotDataBean
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.beans.SNDeleteByLotBean
 import cn.ymade.module_home.db.database.DataBaseManager
+import cn.ymade.module_home.model.DepartStaffInfo
 import cn.ymade.module_home.model.GoodList
 import cn.ymade.module_home.model.UploadLotbean
 import cn.ymade.module_home.model.UploadSNBean
@@ -148,6 +149,46 @@ class VMSync :BaseViewModel() {
 
         }.start()
     }
+
+
+    fun syncStaff(){
+        activity!!.showProgress("正在同步中.")
+                RetrofitManager.retrofit
+                    .create(DeviceInfoApi::class.java)
+                    .queryDepartStaff(AppConfig.Token.get())
+                    .enqueue(object : Callback<DepartStaffInfo> {
+                        override fun onResponse(
+                            call: Call<DepartStaffInfo>,
+                            response: Response<DepartStaffInfo>
+                        ) {
+                            activity!!.hideProgress()
+                            if (response.isSuccessful) {
+                                response.body()?.let {
+                                    if (it.code==1&& it.Depart.isNotEmpty()){
+                                        AppConfig.hasStaff.put(true)
+                                        Thread{
+                                            DataBaseManager.db.departStaffDao().deleteAllDepart()
+                                            DataBaseManager.db.departStaffDao().deleteAllStaff()
+                                            DataBaseManager.db.departStaffDao().insertListDepart(it.Depart)
+                                            if (it.Staff.isNotEmpty()) {
+                                                DataBaseManager.db.departStaffDao().insertListStaff(it.Staff)
+                                            }
+                                        }.start()
+                                    }
+                                }
+                            }
+
+                        }
+
+                        override fun onFailure(call: Call<DepartStaffInfo>, t: Throwable) {
+                            activity!!.hideProgress()
+                            CommUtil.ToastU.showToast("员工获取失败")
+                        }
+                    })
+
+
+    }
+
 
     private fun upComm(
         snList: List<SNBean>,

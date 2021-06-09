@@ -1,0 +1,38 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/background">
+        <include layout="@layout/top_bar_layout" ></include>
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="match_parent"
+            android:textColor="@color/main_blue"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size_10dp"
+            style="@style/commText16"></TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:id="@+id/rv_simple"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/asset_list_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="—— 暂无数据 ——"
+            android:visibility="gone"
+            android:textColor="@color/color_919191">
+
+        </TextView>
+    </LinearLayout>
+
+</layout>

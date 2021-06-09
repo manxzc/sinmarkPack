@@ -38,15 +38,39 @@
         android:layout_marginRight="@dimen/size_16dp"
         android:paddingBottom="12dp"
         android:orientation="vertical">
+
         <TextView
-            android:layout_width="match_parent"
-            android:text="上传货品数据"
             android:id="@+id/upload_check"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_100dp"
             android:gravity="center"
-            android:textColor="@color/color_333333"
-            android:textSize="@dimen/size_24dp"
             android:onClick="startUpLoad"
-            android:layout_height="@dimen/size_100dp"></TextView>
+            android:text="批量上传出库单"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/size_24dp"></TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:background="@drawable/shape_radius_10_white"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="@dimen/size_16dp"
+        android:layout_marginRight="@dimen/size_16dp"
+        android:paddingBottom="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/update_Staff"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_100dp"
+            android:gravity="center"
+            android:onClick="syncStaff"
+            android:text="同步人员数据"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/size_24dp"></TextView>
+
     </LinearLayout>
 </LinearLayout>
 </layout>

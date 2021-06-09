@@ -56,6 +56,11 @@ import java.util.regex.Pattern;
  */
 public class CommUtil<T> {
 
+    public static void closeKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
     /**
      * 判断是否有网络
      *

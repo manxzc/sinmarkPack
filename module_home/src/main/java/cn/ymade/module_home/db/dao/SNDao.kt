@@ -32,6 +32,8 @@ interface SNDao {
     @Query("SELECT * FROM SNBean where Status=1 and SN==:sn   limit 1")
     fun searchsingleNotDeleteBySn(sn:String): List<SNBean>
 
+    @Query("SELECT * FROM SNBean where Status=1 and SN==:sn ")
+    fun searchAllNotDeleteByMatchSN(sn:String): List<SNBean>
 
     @Query("SELECT * FROM SNBean where Status=1 and (SN==:sn or SN like '%'|| :sn|| '%')")
     fun searchAllNotDeleteBy(sn:String): List<SNBean>

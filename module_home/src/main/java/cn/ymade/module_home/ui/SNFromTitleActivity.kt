@@ -3,12 +3,10 @@ package cn.ymade.module_home.ui
 import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySimplesnBinding
-import cn.ymade.module_home.db.beans.LotDataBean
+import cn.ymade.module_home.databinding.ActivitySnfromtitleBinding
 import cn.ymade.module_home.model.SNTitleBean
-import cn.ymade.module_home.vm.VMNewSimpleSN
-import cn.ymade.module_home.vm.VMSimpleSN
+import cn.ymade.module_home.vm.VMSNFromTitle
 import com.zcxie.zc.model_comm.base.BaseActivity
-import com.zcxie.zc.model_comm.util.LiveDataBus
 
 /**
  * @author zc.xie
@@ -17,24 +15,26 @@ import com.zcxie.zc.model_comm.util.LiveDataBus
  * email：3104873490@qq.com
  * description：
  */
-class NewSimpSNActivity :BaseActivity<VMNewSimpleSN,ActivitySimplesnBinding>(){
+class SNFromTitleActivity :BaseActivity<VMSNFromTitle,ActivitySnfromtitleBinding>(){
     override fun getLayoutId(): Int {
-        return R.layout.activity_simplesn
+        return R.layout.activity_snfromtitle
     }
 
     override fun processLogic() {
-        initTopSearchBar()
+
         mViewModel!!.initData(mBinding!!.rvSimple,this)
         val Lot=intent.getSerializableExtra("selectLot") as SNTitleBean
         if (Lot!=null){
+            setTopTitle(Lot.title)
             mViewModel!!.updateUI(this,Lot.snBeans)
             return
-        }
+        }else
+            finish()
 
     }
 
-    override fun findViewModelClass(): Class<VMNewSimpleSN> {
-       return VMNewSimpleSN::class.java
+    override fun findViewModelClass(): Class<VMSNFromTitle> {
+       return VMSNFromTitle::class.java
     }
 
     override fun onSearchAction(s: String) {
