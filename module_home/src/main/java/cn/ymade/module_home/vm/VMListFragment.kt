@@ -40,6 +40,7 @@ class VMListFragment :BaseViewModel() {
     var snAdapter= SnTitleAdapter(snList,object : CallBack<SNTitleBean> {
         override fun callBack(data: SNTitleBean?) {
             Log.i(TAG, "VMListFragment callBack: data "+data.toString())
+
         }
     })
 

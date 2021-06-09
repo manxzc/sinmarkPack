@@ -189,12 +189,12 @@
                 </FrameLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/size_16dp"
-                android:text="货品列表"
-                style="@style/create_operate_tab_margin"></TextView>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="@dimen/size_16dp"-->
+<!--                android:text="货品列表"-->
+<!--                style="@style/create_operate_tab_margin"></TextView>-->
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv"
