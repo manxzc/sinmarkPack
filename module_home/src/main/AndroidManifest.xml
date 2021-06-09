@@ -32,5 +32,8 @@
             android:launchMode="singleTask"></activity>
         <activity android:name=".ui.SummaryActivity"
             android:launchMode="singleTask"></activity>
+
+        <activity android:name=".ui.NewSimpSNActivity"
+            android:launchMode="singleTask"></activity>
     </application>
 </manifest>

@@ -1,5 +1,6 @@
 package cn.ymade.module_home.vm
 
+import android.content.Intent
 import android.text.TextUtils
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,9 @@ import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.beans.StaffBean
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.model.SNTitleBean
+import cn.ymade.module_home.ui.LotInfoActivity
+import cn.ymade.module_home.ui.NewSimpSNActivity
+import cn.ymade.module_home.ui.SimpSNActivity
 import cn.ymade.module_home.ui.fragment.SNListFragment
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
@@ -40,7 +44,7 @@ class VMListFragment :BaseViewModel() {
     var snAdapter= SnTitleAdapter(snList,object : CallBack<SNTitleBean> {
         override fun callBack(data: SNTitleBean?) {
             Log.i(TAG, "VMListFragment callBack: data "+data.toString())
-
+            fragment!!.context!!.startActivity(Intent( fragment!!.context!!, NewSimpSNActivity::class.java).putExtra("selectLot",data))
         }
     })
 
