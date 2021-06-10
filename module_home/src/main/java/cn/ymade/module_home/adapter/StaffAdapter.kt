@@ -1,11 +1,8 @@
 package cn.ymade.module_home.adapter
 
 import cn.ymade.module_home.R
-import cn.ymade.module_home.databinding.ItemGroupSelectLayoutBinding
 import cn.ymade.module_home.databinding.ItemStaffSelectLayoutBinding
-import cn.ymade.module_home.db.beans.DepartBean
 import cn.ymade.module_home.db.beans.StaffBean
-import cn.ymade.module_home.model.HomeMenuBean
 import com.zcxie.zc.model_comm.base.BindBaseAdapter
 import com.zcxie.zc.model_comm.base.BindBaseViewHolder
 import com.zcxie.zc.model_comm.callbacks.CallBack
@@ -17,7 +14,7 @@ import com.zcxie.zc.model_comm.callbacks.CallBack
  * email：3104873490@qq.com
  * description：
  */
-class StaffAdapter(val list: List<StaffBean>, val callBack: CallBack<StaffBean>) :BindBaseAdapter<StaffBean>(list) {
+class StaffAdapter(val list: List<StaffBean>,private val itemCallBack: CallBack<StaffBean>) :BindBaseAdapter<StaffBean>(list) {
     override fun getLayoutId(): Int {
 
         return R.layout.item_staff_select_layout
@@ -37,7 +34,7 @@ class StaffAdapter(val list: List<StaffBean>, val callBack: CallBack<StaffBean>)
             lastSelectIndex=position
 
         holder.itemView.setOnClickListener {
-            callBack?.let {
+            itemCallBack?.let {
                 it.callBack(list[position])
                 if (lastSelectIndex!=-1)
                 list[lastSelectIndex].current=0

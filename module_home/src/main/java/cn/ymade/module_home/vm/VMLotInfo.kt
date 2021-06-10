@@ -50,38 +50,35 @@ class VMLotInfo:BaseViewModel() {
     val snList= mutableListOf<SNBean>()
     val titleList= mutableListOf<SNTitleBean>()
 
-    var snTitleAdapter= SnTitleAdapter(titleList, object : CallBack<SNTitleBean> {
-        override fun callBack(data: SNTitleBean) {
-            Log.i(TAG, " callBack: snTitleAdapter " + data.toString())
-            Thread {
-                for (snBean in data.snBeans) {
-                    if (snBean.upload == 2) { //如果上传过 需要存储 删除的数据
-                        val deletelis = DataBaseManager.db.sndeleteSnDao()
-                            .searchNotDeleteBySnAndLotSN(snBean!!.SN, snBean!!.LotSN)
-                        if (deletelis.isNullOrEmpty()) {
-                            var sndeleteBean = SNDeleteByLotBean()
-                            sndeleteBean.LotSN = snBean!!.LotSN
-                            sndeleteBean.SN = snBean!!.SN
-                            sndeleteBean.ModifyTime = CommUtil.getCurrentTimeYMD()
-                            DataBaseManager.db.sndeleteSnDao().insert(sndeleteBean)
-                        } else {
-                            deletelis[0].ModifyTime = CommUtil.getCurrentTimeYMD()
-                            DataBaseManager.db.sndeleteSnDao().insert(deletelis[0])
-                        }
-                    }
-
-                    snBean.LotSN = ""
-                    snBean.ModifyTime = CommUtil.getCurrentTimeYMD()
-                    snBean.out = 0
-                    snBean.upload = 0
-                    DataBaseManager.db.snDao().updateSN(snBean)
-
-                }
-            }.start()
-            for (sb in data.snBeans) {
-                outsideLis.remove(sb.SN)
-            }
+    var snTitleAdapter= SnTitleAdapter(titleList, { data ->
+        Log.i(TAG, " callBack: snTitleAdapter $data")
+        Thread {
             for (snBean in data.snBeans) {
+                if (snBean.upload == 2) { //如果上传过 需要存储 删除的数据
+                    val deletelis = DataBaseManager.db.sndeleteSnDao()
+                            .searchNotDeleteBySnAndLotSN(snBean!!.SN, snBean!!.LotSN)
+                    if (deletelis.isNullOrEmpty()) {
+                        var sndeleteBean = SNDeleteByLotBean()
+                        sndeleteBean.LotSN = snBean!!.LotSN
+                        sndeleteBean.SN = snBean!!.SN
+                        sndeleteBean.ModifyTime = CommUtil.getCurrentTimeYMD()
+                        DataBaseManager.db.sndeleteSnDao().insert(sndeleteBean)
+                    } else {
+                        deletelis[0].ModifyTime = CommUtil.getCurrentTimeYMD()
+                        DataBaseManager.db.sndeleteSnDao().insert(deletelis[0])
+                    }
+                }
+                snBean.LotSN = ""
+                snBean.ModifyTime = CommUtil.getCurrentTimeYMD()
+                snBean.out = 0
+                snBean.upload = 0
+                DataBaseManager.db.snDao().updateSN(snBean)
+            }
+        }.start()
+        for (sb in data.snBeans) {
+            outsideLis.remove(sb.SN)
+        }
+        for (snBean in data.snBeans) {
             for (sb in snList) {
                 Log.i(TAG, "callBack: sb.sn " + sb.SN + " snBean.SN " + snBean.SN)
 
@@ -90,11 +87,10 @@ class VMLotInfo:BaseViewModel() {
                     break
                 }
             }
-            }
-            titleList.remove(data)
-            notyChange()
         }
-    })
+        titleList.remove(data)
+        notyChange()
+    },null)
 
     var lotSnInfoAdapter= LotInfoSnAdapter(snList,object : CallBack<SNBean> {
         override fun callBack(data: SNBean) {

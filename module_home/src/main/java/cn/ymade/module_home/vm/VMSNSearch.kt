@@ -4,12 +4,10 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.ymade.module_home.adapter.SNLIstAdapter
-import cn.ymade.module_home.adapter.SNLIstSimpleAdapter
+import cn.ymade.module_home.adapter.SNListAdapter
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.SNSearchActivity
-import cn.ymade.module_home.ui.SimpSNActivity
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -31,7 +29,7 @@ class VMSNSearch: BaseViewModel() {
     var lastSearch:String=""
 
     var act: SNSearchActivity?=null
-    var snAdapter= SNLIstAdapter(snList,object : CallBack<SNBean> {
+    var snAdapter= SNListAdapter(snList,object : CallBack<SNBean> {
         override fun callBack(data: SNBean?) {
             Log.i(TAG, "VMListFragment callBack: data "+data.toString())
         }

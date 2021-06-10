@@ -4,7 +4,7 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.ymade.module_home.adapter.NewSNLIstSimpleAdapter
+import cn.ymade.module_home.adapter.SNFromTitleSimpleAdapter
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.SNFromTitleActivity
@@ -29,7 +29,7 @@ class VMSNFromTitle :BaseViewModel() {
     var lastSearch:String=""
 
     var act: SNFromTitleActivity?=null
-    var snAdapter= NewSNLIstSimpleAdapter(snList,object : CallBack<SNBean> {
+    var snAdapter= SNFromTitleSimpleAdapter(snList,object : CallBack<SNBean> {
         override fun callBack(data: SNBean?) {
             Log.i(TAG, " callBack: data "+data.toString())
         }

@@ -18,11 +18,11 @@ import cn.ymade.module_home.model.HomeMenuBean;
 
 
 public class HomeMenuAdapter extends BindBaseAdapter<HomeMenuBean> {
-    CallBack<HomeMenuBean> callBack = null;
+    CallBack<HomeMenuBean> itemCallBack = null;
 
-    public HomeMenuAdapter(List<HomeMenuBean> list, CallBack<HomeMenuBean> callBack) {
+    public HomeMenuAdapter(List<HomeMenuBean> list, CallBack<HomeMenuBean> itemCallBack) {
         super(list);
-        this.callBack = callBack;
+        this.itemCallBack = itemCallBack;
     }
 
     @Override
@@ -37,8 +37,8 @@ public class HomeMenuAdapter extends BindBaseAdapter<HomeMenuBean> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (null!=callBack)
-                    callBack.callBack((HomeMenuBean) getDatas().get(position));
+                if (null!=itemCallBack)
+                    itemCallBack.callBack((HomeMenuBean) getDatas().get(position));
             }
         });
     }

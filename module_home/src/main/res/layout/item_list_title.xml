@@ -23,6 +23,7 @@
         android:paddingRight="@dimen/size_16dp"
         android:paddingLeft="@dimen/size_16dp"
         android:gravity="center_vertical">
+
     <TextView
         android:id="@+id/start"
         android:background="@drawable/shape_radius_blue_limit"

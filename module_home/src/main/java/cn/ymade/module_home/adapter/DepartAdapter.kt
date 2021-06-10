@@ -1,6 +1,5 @@
 package cn.ymade.module_home.adapter
 
-import android.graphics.Color
 import android.util.Log
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ItemGroupSelectLayoutBinding
@@ -16,7 +15,7 @@ import com.zcxie.zc.model_comm.callbacks.CallBack
  * email：3104873490@qq.com
  * description：
  */
-class DepartAdapter(val list: List<DepartBean>, val callBack: CallBack<DepartBean>) :BindBaseAdapter<DepartBean>(list) {
+class DepartAdapter(val list: List<DepartBean>, val itemCallBack: CallBack<DepartBean>) :BindBaseAdapter<DepartBean>(list) {
 
     override fun getLayoutId(): Int {
 
@@ -36,7 +35,7 @@ class DepartAdapter(val list: List<DepartBean>, val callBack: CallBack<DepartBea
         }
         holder.itemView.setOnClickListener {
             Log.i("TAG", "onBindViewHolder:  Depart click item "+position)
-            callBack?.let {
+            itemCallBack?.let {
                 it.callBack(list[position])
                 if (lastSelectIndex!=-1)
                 list[lastSelectIndex].current=0

@@ -8,17 +8,19 @@
             name="bean"
             type="cn.ymade.module_home.db.beans.SNBean" />
     </data>
-    <LinearLayout
+       <LinearLayout
         android:layout_width="match_parent"
+        android:background="@drawable/selector_print_mode_item_bg"
+        android:id="@+id/ll_staff_select"
+        android:orientation="vertical"
+        android:layout_height="@dimen/size_40dp">
+         <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
         android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/size_12dp"
-        android:layout_marginTop="@dimen/size_6dp"
-        android:layout_marginRight="@dimen/size_12dp"
-        android:layout_marginBottom="@dimen/size_5dp"
-        android:background="@drawable/shape_radius_10_white"
-        android:paddingLeft="@dimen/size_12dp"
-        android:paddingBottom="@dimen/size_6dp"
-        android:layout_height="wrap_content">
+        android:paddingRight="@dimen/size_16dp"
+        android:paddingLeft="@dimen/size_16dp"
+        android:gravity="center_vertical">
         <ImageView
             android:id="@+id/asset_select_delect_iv"
             android:layout_width="@dimen/size_50dp"
@@ -26,10 +28,7 @@
             android:paddingLeft="@dimen/size_10dp"
             android:paddingRight="@dimen/size_14dp"
             android:src="@mipmap/delet_red_icon"></ImageView>
-        <RelativeLayout
-            android:paddingTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <TextView
                 android:id="@+id/assets_name"
@@ -42,16 +41,23 @@
                 android:ellipsize="end"
                 android:textSize="16dp"
                 tools:text="雪花膏"></TextView>
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"></View>
             <TextView
                 style="@style/commTextValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/assets_name"
-                android:layout_marginTop="4dp"
                 android:maxLines="1"
                 android:text="@{String.valueOf(bean.SN)}"
                 tools:text="name"></TextView>
-        </RelativeLayout>
     </LinearLayout>
+          <View
+        android:id="@+id/item_staff_bottom_line"
+        android:layout_marginLeft="16dp"
+        style="@style/bottomLine">
+    </View>
+</LinearLayout>
 </layout>

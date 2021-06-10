@@ -43,6 +43,10 @@ class LoginActivity : BaseActivity<LoginViewModel, ActivityLoginBinding>() {
                    }else CommUtil.ToastU.showToast("登录失败")
                })
            }
+           it.loginExp.setOnClickListener {
+               mBinding!!.phoneInputEt.setText("600000")
+               mBinding!!.loginAck.performClick()
+           }
        }
     }
 

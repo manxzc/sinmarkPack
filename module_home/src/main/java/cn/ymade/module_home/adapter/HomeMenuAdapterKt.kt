@@ -8,7 +8,7 @@ import com.zcxie.zc.model_comm.base.BindBaseAdapter
 import com.zcxie.zc.model_comm.base.BindBaseViewHolder
 import com.zcxie.zc.model_comm.callbacks.CallBack
 
-class HomeMenuAdapterKt(private val list: List<HomeMenuBean>, val callBack: CallBack<HomeMenuBean>) :BindBaseAdapter<HomeMenuBean>(
+class HomeMenuAdapterKt(private val list: List<HomeMenuBean>, val itemCallBack: CallBack<HomeMenuBean>) :BindBaseAdapter<HomeMenuBean>(
     list
 ) {
     val TAG="HomeMenuAdapterKt"
@@ -21,7 +21,7 @@ class HomeMenuAdapterKt(private val list: List<HomeMenuBean>, val callBack: Call
         holder.binding.executePendingBindings()
         holder.itemView.setOnClickListener {
             Log.i(TAG, "onBindViewHolder: position $position")
-            if (null != callBack) callBack.callBack(datas[position])
+            if (null != itemCallBack) itemCallBack.callBack(datas[position])
         }
     }
 }

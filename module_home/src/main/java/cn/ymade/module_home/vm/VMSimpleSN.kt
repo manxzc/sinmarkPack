@@ -4,12 +4,10 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.ymade.module_home.adapter.SNLIstAdapter
 import cn.ymade.module_home.adapter.SNLIstSimpleAdapter
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.database.DataBaseManager
 import cn.ymade.module_home.ui.SimpSNActivity
-import cn.ymade.module_home.ui.fragment.SNListFragment
 import com.zcxie.zc.model_comm.base.BaseViewModel
 import com.zcxie.zc.model_comm.callbacks.CallBack
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

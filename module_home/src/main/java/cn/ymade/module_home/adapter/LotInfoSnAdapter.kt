@@ -3,12 +3,7 @@ package cn.ymade.module_home.adapter
 import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ItemOutlotInfoSnBinding
-import cn.ymade.module_home.databinding.ItemSimpleBinding
-import cn.ymade.module_home.databinding.ItemSnlistBinding
-import cn.ymade.module_home.databinding.ItemStaffSelectLayoutBinding
 import cn.ymade.module_home.db.beans.SNBean
-import cn.ymade.module_home.db.beans.StaffBean
-import cn.ymade.module_home.utils.ImageUtil
 import com.zcxie.zc.model_comm.base.BindBaseAdapter
 import com.zcxie.zc.model_comm.base.BindBaseViewHolder
 import com.zcxie.zc.model_comm.callbacks.CallBack
@@ -20,7 +15,7 @@ import com.zcxie.zc.model_comm.callbacks.CallBack
  * email：3104873490@qq.com
  * description：
  */
-class LotInfoSnAdapter (val list: List<SNBean>, val callBack: CallBack<SNBean>) :
+class LotInfoSnAdapter (val list: List<SNBean>, private val deleteCallBack: CallBack<SNBean>) :
     BindBaseAdapter<SNBean>(list) {
     var showDelete=true
     override fun getLayoutId(): Int {
@@ -37,7 +32,7 @@ class LotInfoSnAdapter (val list: List<SNBean>, val callBack: CallBack<SNBean>) 
         if (showDelete) {
             (holder.binding as ItemOutlotInfoSnBinding).assetSelectDelectIv.visibility= View.VISIBLE
             (holder.binding as ItemOutlotInfoSnBinding).assetSelectDelectIv.setOnClickListener {
-                callBack?.let {
+                deleteCallBack?.let {
                     it.callBack(data)
                 }
             }

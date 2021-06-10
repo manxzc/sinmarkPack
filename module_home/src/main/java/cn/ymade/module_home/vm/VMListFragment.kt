@@ -34,11 +34,9 @@ class VMListFragment :BaseViewModel() {
     var type:Int=0
 
 
-    var snAdapter= SnTitleAdapter(snList,object : CallBack<SNTitleBean> {
-        override fun callBack(data: SNTitleBean?) {
-            Log.i(TAG, "VMListFragment callBack: data "+data.toString())
-            fragment!!.context!!.startActivity(Intent( fragment!!.context!!, SNFromTitleActivity::class.java).putExtra("selectLot",data))
-        }
+    var snAdapter= SnTitleAdapter(snList,null, { data ->
+        Log.i(TAG, "VMListFragment callBack: data $data")
+        fragment!!.context!!.startActivity(Intent( fragment!!.context!!, SNFromTitleActivity::class.java).putExtra("selectLot",data))
     })
 
 
