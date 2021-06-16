@@ -109,7 +109,6 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
     override fun loadCoded(scanCode: String) {
         sendChange=true
         mViewModel?.addScan(scanCode)
-
     }
     
     override fun onStop() {
@@ -119,5 +118,9 @@ class LotInfoActivity : ScanBaseActivity<VMLotInfo, ActivityLotInfoBinding>() {
             LiveDataBus.get().with(Constant.LD_UP_HOME_TITLE).postValue(1)
             LiveDataBus.get().with("notyChange").postValue("1")
         }
+    }
+
+    override fun enableFastSuccess(): Boolean {
+        return false
     }
 }

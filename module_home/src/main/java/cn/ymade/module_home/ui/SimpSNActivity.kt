@@ -3,6 +3,7 @@ package cn.ymade.module_home.ui
 import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySimplesnBinding
+import cn.ymade.module_home.homebase.ScanBaseActivity
 import cn.ymade.module_home.vm.VMSimpleSN
 import com.zcxie.zc.model_comm.base.BaseActivity
 import com.zcxie.zc.model_comm.util.LiveDataBus
@@ -14,7 +15,7 @@ import com.zcxie.zc.model_comm.util.LiveDataBus
  * email：3104873490@qq.com
  * description：
  */
-class SimpSNActivity :BaseActivity<VMSimpleSN,ActivitySimplesnBinding>(){
+class SimpSNActivity :ScanBaseActivity<VMSimpleSN,ActivitySimplesnBinding>(){
     override fun getLayoutId(): Int {
         return R.layout.activity_simplesn
     }
@@ -34,10 +35,6 @@ class SimpSNActivity :BaseActivity<VMSimpleSN,ActivitySimplesnBinding>(){
        mViewModel!!.searchData(s)
     }
 
-    override fun loadCode(value: String) {
-        super.loadCode(value)
-        setDoSeach(value)
-    }
 
     fun reloadTitle(text:String){
         mBinding!!.count.text=text
@@ -48,5 +45,12 @@ class SimpSNActivity :BaseActivity<VMSimpleSN,ActivitySimplesnBinding>(){
         }else{
             mBinding!!.assetListEmpty.visibility= View.GONE
         }
+    }
+    override fun loadCoded(scanCode: String) {
+        setDoSeach(scanCode)
+    }
+
+    override fun enableFastSuccess(): Boolean {
+        return true
     }
 }

@@ -4,6 +4,7 @@ import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySimplesnBinding
 import cn.ymade.module_home.databinding.ActivitySnfromtitleBinding
+import cn.ymade.module_home.homebase.ScanBaseActivity
 import cn.ymade.module_home.model.SNTitleBean
 import cn.ymade.module_home.vm.VMSNFromTitle
 import com.zcxie.zc.model_comm.base.BaseActivity
@@ -15,7 +16,7 @@ import com.zcxie.zc.model_comm.base.BaseActivity
  * email：3104873490@qq.com
  * description：
  */
-class SNFromTitleActivity :BaseActivity<VMSNFromTitle,ActivitySnfromtitleBinding>(){
+class SNFromTitleActivity :ScanBaseActivity<VMSNFromTitle,ActivitySnfromtitleBinding>(){
     override fun getLayoutId(): Int {
         return R.layout.activity_snfromtitle
     }
@@ -42,11 +43,6 @@ class SNFromTitleActivity :BaseActivity<VMSNFromTitle,ActivitySnfromtitleBinding
        mViewModel!!.searchData(s)
     }
 
-    override fun loadCode(value: String) {
-        super.loadCode(value)
-        setDoSeach(value)
-    }
-
     fun reloadTitle(text:String){
         mBinding!!.count.text=text
     }
@@ -56,5 +52,13 @@ class SNFromTitleActivity :BaseActivity<VMSNFromTitle,ActivitySnfromtitleBinding
         }else{
             mBinding!!.assetListEmpty.visibility= View.GONE
         }
+    }
+
+    override fun loadCoded(scanCode: String) {
+        setDoSeach(scanCode)
+    }
+
+    override fun enableFastSuccess(): Boolean {
+       return true
     }
 }

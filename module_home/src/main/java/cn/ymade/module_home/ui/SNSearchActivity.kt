@@ -5,6 +5,7 @@ import android.view.View
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySearchsnBinding
 import cn.ymade.module_home.databinding.FragmentSnlistBinding
+import cn.ymade.module_home.homebase.ScanBaseActivity
 import cn.ymade.module_home.vm.VMListFragment
 import cn.ymade.module_home.vm.VMSNSearch
 import com.zcxie.zc.model_comm.base.BaseActivity
@@ -16,7 +17,7 @@ import com.zcxie.zc.model_comm.base.BaseActivity
  * email：3104873490@qq.com
  * description：
  */
-class SNSearchActivity :BaseActivity<VMSNSearch,ActivitySearchsnBinding>() {
+class SNSearchActivity :ScanBaseActivity<VMSNSearch,ActivitySearchsnBinding>() {
     override fun getLayoutId(): Int {
         return R.layout.activity_searchsn
     }
@@ -35,10 +36,7 @@ class SNSearchActivity :BaseActivity<VMSNSearch,ActivitySearchsnBinding>() {
         mViewModel!!.searchData(s)
     }
 
-    override fun loadCode(value: String) {
-        super.loadCode(value)
-        setDoSeach(value)
-    }
+
     fun reloadTitle(text:String){
         mBinding!!.count.text=text
     }
@@ -48,5 +46,12 @@ class SNSearchActivity :BaseActivity<VMSNSearch,ActivitySearchsnBinding>() {
         }else{
             mBinding!!.assetListEmpty.visibility= View.GONE
         }
+    }
+    override fun loadCoded(scanCode: String) {
+        setDoSeach(scanCode)
+    }
+
+    override fun enableFastSuccess(): Boolean {
+        return true
     }
 }

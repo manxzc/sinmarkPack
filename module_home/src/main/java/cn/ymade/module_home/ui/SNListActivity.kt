@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.Observer
 import cn.ymade.module_home.R
 import cn.ymade.module_home.databinding.ActivitySnListBinding
+import cn.ymade.module_home.homebase.ScanBaseActivity
 import cn.ymade.module_home.vm.VMSNList
 import com.zcxie.zc.model_comm.base.BaseActivity
 import com.zcxie.zc.model_comm.util.LiveDataBus
@@ -16,7 +17,7 @@ import com.zcxie.zc.model_comm.util.LiveDataBus
  * description：
  */
 //货品
-class SNListActivity :BaseActivity<VMSNList,ActivitySnListBinding>() {
+class SNListActivity :ScanBaseActivity<VMSNList,ActivitySnListBinding>() {
     override fun getLayoutId(): Int {
         return R.layout.activity_sn_list
     }
@@ -36,10 +37,7 @@ class SNListActivity :BaseActivity<VMSNList,ActivitySnListBinding>() {
         LiveDataBus.get().with("searchSN").postValue(s)
     }
 
-    override fun loadCode(value: String) {
-        super.loadCode(value)
-        setDoSeach(value)
-    }
+
 
     private fun initEvent() {
     }
@@ -49,5 +47,12 @@ class SNListActivity :BaseActivity<VMSNList,ActivitySnListBinding>() {
     }
     fun refreshTab(index: Int, count: String?) {
         mBinding?.mTabLayout!!.getTabAt(index)?.setText(count)
+    }
+    override fun loadCoded(scanCode: String) {
+        setDoSeach(scanCode)
+    }
+
+    override fun enableFastSuccess(): Boolean {
+        return true
     }
 }
