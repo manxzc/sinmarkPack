@@ -413,12 +413,12 @@ class VMLotInfo:BaseViewModel() {
         outsideLis.forEach {
             if (it==scanCode)
             {
-                act!!.fail.start()
                 CommUtil.ToastU.showToast("此条码已添加过~！")
+               act!!.fail?.start()
                 return
             }
         }
-        act!!.success.start()
+        act!!.success?.start()
         outsideLis.add(scanCode)
 
         Log.i(TAG, "addScan: ")

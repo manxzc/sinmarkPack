@@ -1,7 +1,9 @@
 package cn.ymade.module_home.homebase
 
 import android.media.MediaPlayer
+import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import androidx.databinding.ViewDataBinding
 import cn.ymade.module_home.R
 import com.zcxie.zc.model_comm.base.BaseActivity
@@ -16,23 +18,36 @@ import com.zcxie.zc.model_comm.base.BaseViewModel
  */
 open abstract class ScanBaseActivity<VM : BaseViewModel?, VDB : ViewDataBinding?>  :BaseActivity<VM, VDB>() {
 
-    var success = MediaPlayer.create(applicationContext, R.raw.success)
-    var fail = MediaPlayer.create(applicationContext, R.raw.fail)
+    var success :MediaPlayer?=null
+    var fail:MediaPlayer?=null
     abstract fun loadCoded(scanCode: String)
     abstract fun enableFastSuccess():Boolean
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        success = MediaPlayer.create(this, R.raw.success)
+        Log.i(TAG, "onCreate: success "+success)
+        fail = MediaPlayer.create(this, R.raw.fail)
+
+    }
     override fun loadCode(value: String) {
         super.loadCode(value)
         if (!TextUtils.isEmpty(value)) {
             if (enableFastSuccess()){
-                success.start()
+                Log.i(TAG, "loadCode:start  ")
+                success!!.start()
             }
             loadCoded(value)
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        loadCode("22")
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        success.release()
-        fail.release()
+        success?.release()
+        fail?.release()
     }
 }

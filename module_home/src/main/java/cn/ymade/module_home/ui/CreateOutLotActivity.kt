@@ -65,4 +65,9 @@ class CreateOutLotActivity : ScanBaseActivity<VMCraeteOutLot,ActivityCreateOutBi
         }
 
     }
+
+    override fun enableFastSuccess(): Boolean {
+
+        return false
+    }
 }
