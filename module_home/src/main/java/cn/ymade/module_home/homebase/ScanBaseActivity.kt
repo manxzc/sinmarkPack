@@ -40,11 +40,6 @@ open abstract class ScanBaseActivity<VM : BaseViewModel?, VDB : ViewDataBinding?
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        loadCode("22")
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         success?.release()

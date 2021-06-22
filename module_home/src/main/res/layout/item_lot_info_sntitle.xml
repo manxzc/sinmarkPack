@@ -38,7 +38,7 @@
                 android:textColor="@color/color_333333"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:textSize="16dp"
+                android:textSize="14dp"
                 tools:text="雪花膏"></TextView>
         <View
             android:layout_width="0dp"
