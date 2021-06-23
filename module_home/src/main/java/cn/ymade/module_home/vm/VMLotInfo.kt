@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.ymade.module_home.adapter.LotInfoSnAdapter
 import cn.ymade.module_home.adapter.SnTitleAdapter
-import cn.ymade.module_home.common.Constant
 import cn.ymade.module_home.db.beans.LotDataBean
 import cn.ymade.module_home.db.beans.SNBean
 import cn.ymade.module_home.db.beans.SNDeleteByLotBean
@@ -20,7 +19,6 @@ import com.zcxie.zc.model_comm.model.BaseModel
 import com.zcxie.zc.model_comm.net.RetrofitManager
 import com.zcxie.zc.model_comm.util.AppConfig
 import com.zcxie.zc.model_comm.util.CommUtil
-import com.zcxie.zc.model_comm.util.LiveDataBus
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer

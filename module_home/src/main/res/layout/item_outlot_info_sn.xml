@@ -31,27 +31,25 @@
 
 
             <TextView
-                android:id="@+id/assets_name"
+                android:id="@+id/item_lot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{String.valueOf(bean.Title)}"
-                android:layout_marginRight="@dimen/size_70dp"
+                android:layout_marginRight="@dimen/size_10dp"
                 android:textColor="@color/color_333333"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textSize="14dp"
                 tools:text="雪花膏"></TextView>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"></View>
             <TextView
                 style="@style/commTextValue"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="right"
                 android:layout_below="@+id/assets_name"
                 android:maxLines="1"
                 android:ellipsize="end"
+                android:id="@+id/item_rfid"
                 android:textSize="12dp"
                 android:text="@{String.valueOf(bean.SN)}"
                 tools:text="name"></TextView>
